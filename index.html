@@ -3,91 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Second Chapter | Shaima Alhubaishi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>The Second Chapter | Re-homing Knowledge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #2c3e50; --accent: #27ae60; --bg: #fdfcf9; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--bg); color: var(--primary); line-height: 1.6; scroll-behavior: smooth; }
-        nav { background: #fff; padding: 15px 0; position: sticky; top: 0; display: flex; justify-content: center; gap: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000; flex-wrap: wrap; }
-        nav a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; padding: 5px 8px; border-radius: 5px; transition: 0.3s; }
-        nav a:hover { background: var(--accent); color: white; }
-        header { background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1500&q=80'); background-size: cover; background-position: center; color: white; padding: 80px 20px; text-align: center; }
-        header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin: 0; }
-        .container { padding: 40px 20px; max-width: 1300px; margin: auto; }
-        section { margin-bottom: 50px; padding-top: 30px; }
-        h2 { text-align: center; font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary); margin-bottom: 30px; border-bottom: 3px solid var(--accent); display: block; padding-bottom: 10px; }
-        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
-        .book-card { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; transition: 0.3s; border: 1px solid #eee; display: flex; flex-direction: column; justify-content: space-between; }
-        .book-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .book-card img { width: 100%; height: 220px; object-fit: contain; border-radius: 5px; margin-bottom: 10px; background: #f9f9f9; }
-        .book-card h3 { font-size: 0.85rem; margin: 5px 0; height: 40px; overflow: hidden; }
-        .price { color: var(--accent); font-weight: bold; font-size: 1rem; margin-bottom: 10px; display: block; }
-        .btn { background: var(--accent); color: white; padding: 8px 12px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 0.75rem; transition: 0.3s; }
-        .btn:hover { background: #219150; }
-        .embed-container { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-top: 20px; text-align: center; }
-        iframe { width: 100%; border: none; border-radius: 10px; min-height: 450px; }
-        footer { background: var(--primary); color: white; text-align: center; padding: 30px; margin-top: 50px; }
+        :root { --primary: #1a2a3a; --accent: #c6934b; --bg: #f9f7f2; --text: #333; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        
+        /* Animation for floating elements */
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+        /* Full Screen Hero Section */
+        header { 
+            height: 100vh; 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2000'); 
+            background-size: cover; background-position: center; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
+        }
+        header h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; margin: 0; }
+        header p { font-style: italic; font-size: 1.5rem; max-width: 600px; }
+
+        nav { background: white; padding: 20px 0; position: sticky; top: 0; display: flex; justify-content: center; gap: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 1000; flex-wrap: wrap; }
+        nav a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .container { padding: 60px 20px; max-width: 1200px; margin: auto; }
+        
+        /* About Section - Real & Professional */
+        .about-section { background: white; padding: 50px; border-radius: 20px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.05); margin-bottom: 80px; }
+        .about-section h2 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 2.5rem; }
+        .about-section p { font-size: 1.1rem; color: #555; max-width: 800px; margin: auto; line-height: 1.8; }
+
+        /* Dynamic Book Grid */
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
+        .book-card { 
+            background: white; border-radius: 15px; overflow: hidden; transition: 0.4s; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-bottom: 4px solid transparent;
+        }
+        .book-card:hover { transform: translateY(-10px); border-bottom-color: var(--accent); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .book-card img { width: 100%; height: 320px; object-fit: cover; }
+        .book-info { padding: 20px; text-align: center; }
+        .book-info h3 { margin: 10px 0; font-size: 1.1rem; min-height: 50px; }
+        .price-tag { display: block; color: var(--accent); font-weight: bold; font-size: 1.2rem; margin-bottom: 15px; }
+        
+        .order-btn { 
+            display: inline-block; background: var(--primary); color: white; padding: 10px 25px; 
+            text-decoration: none; border-radius: 30px; transition: 0.3s; font-size: 0.9rem;
+        }
+        .order-btn:hover { background: var(--accent); }
+
+        footer { background: var(--primary); color: white; text-align: center; padding: 60px 20px; }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#about">About</a>
+    <a href="#about">The Story</a>
+    <a href="#arabic">Arabic Novels</a>
     <a href="#lit">Literature</a>
-    <a href="#ling">Linguistics</a>
-    <a href="#media">Media</a>
-    <a href="#novels">Novels</a>
-    <a href="#religion">Religious</a>
-    <a href="#self">Self-Help</a>
-    <a href="#it">IT</a>
-    <a href="#contact">Order & Location</a>
+    <a href="#it">IT & Tech</a>
+    <a href="#contact">Order & Delivery</a>
 </nav>
 
-<header id="home">
+<header>
     <h1>The Second Chapter</h1>
-    <p>English | Media | IT - Academic Collection by Shaima Alhubaishi</p>
+    <p>"Reading is Life. Give a book a second home."</p>
 </header>
 
 <div class="container">
-    <section id="about">
-        <h2>About Us</h2>
-        <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-            <p>Welcome to <strong>The Second Chapter</strong>. This project showcases the intersection of English Literature and Information Technology. We provide high-quality pre-loved books for students and enthusiasts in Kuwait.</p>
-        </div>
+    
+    <section id="about" class="about-section">
+        <h2>Our Mission</h2>
+        <p>
+            Welcome to <strong>The Second Chapter</strong>. This platform is a personal initiative to re-home my curated collection of books that have been carefully read and loved. 
+            I believe that books should not sit on shelves; they are meant to travel and enlighten new minds. 
+            Every book here is offered at an affordable price to encourage a sustainable reading culture in Kuwait. 
+            Whether you are a student at Kuwait University or a fellow book lover across the country, we are happy to deliver knowledge right to your doorstep.
+        </p>
     </section>
 
-    <section id="lit">
-        <h2>English Literature</h2>
+    <section id="arabic">
+        <h2 style="text-align: center; font-family: 'Playfair Display'; font-size: 2.5rem;">Arabic Literature & Novels</h2>
+        <p style="text-align: center; margin-bottom: 40px;">Featuring masterpiece works from Egyptian and Arab icons.</p>
         <div class="book-grid">
-            <div class="book-card"><img src="https://m.media-amazon.com/images/I/91H3SOTp7sL.jpg"><h3>Pride & Prejudice</h3><span class="price">3.000 KWD</span><a href="https://wa.me/96551234567" class="btn">Order via WhatsApp</a></div>
-            <div class="book-card"><img src="https://m.media-amazon.com/images/I/718706uA26L.jpg"><h3>Wuthering Heights</h3><span class="price">3.000 KWD</span><a href="https://wa.me/96551234567" class="btn">Order via WhatsApp</a></div>
-            <div class="book-card"><img src="https://m.media-amazon.com/images/I/81af+S9baFL.jpg"><h3>The Great Gatsby</h3><span class="price">2.500 KWD</span><a href="https://wa.me/96551234567" class="btn">Order via WhatsApp</a></div>
+            <div class="book-card">
+                <img src="https://m.media-amazon.com/images/I/71jYy8E+n9L.jpg" alt="Naghib Mahfouz">
+                <div class="book-info">
+                    <h3>بين القصرين - نجيب محفوظ</h3>
+                    <span class="price-tag">3.500 KWD</span>
+                    <a href="https://wa.me/96551234567" class="order-btn">Order Now</a>
+                </div>
             </div>
-    </section>
-
-    <section id="it">
-        <h2>IT & Programming</h2>
-        <div class="book-grid">
-            <div class="book-card"><img src="https://m.media-amazon.com/images/I/61N6K1+C9UL.jpg"><h3>C++ Programming</h3><span class="price">7.000 KWD</span><a href="https://wa.me/96551234567" class="btn">Order Now</a></div>
-            <div class="book-card"><img src="https://m.media-amazon.com/images/I/712X0A7pYDL.jpg"><h3>Database Systems</h3><span class="price">6.500 KWD</span><a href="https://wa.me/96551234567" class="btn">Order Now</a></div>
+            <div class="book-card">
+                <img src="https://m.media-amazon.com/images/I/71zD52+oNGL.jpg" alt="Ahmed Mourad">
+                <div class="book-info">
+                    <h3>الفيل الأزرق - أحمد مراد</h3>
+                    <span class="price-tag">4.000 KWD</span>
+                    <a href="https://wa.me/96551234567" class="order-btn">Order Now</a>
+                </div>
+            </div>
+            <div class="book-card">
+                <img src="https://m.media-amazon.com/images/I/81A+qO3N7HL.jpg" alt="Taha Hussein">
+                <div class="book-info">
+                    <h3>الأيام - طه حسين</h3>
+                    <span class="price-tag">2.500 KWD</span>
+                    <a href="https://wa.me/96551234567" class="order-btn">Order Now</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact">
-        <h2>Contact & Location</h2>
-        <div class="embed-container">
-            <h3>Place Your Order</h3>
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfD_uA1GvB1I_1m_66W8-YQ/viewform?embedded=true">Loading…</iframe>
-        </div>
-        <div class="embed-container">
-            <h3>Our Location</h3>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d111244.15233156947!2d47.88214220304588!3d29.315128033620906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf9c0964175399%3A0xc3f48834f37803e1!2sKuwait%20University!5e0!3m2!1sen!2skw!4v1712800000000!5m2!1sen!2skw"></iframe>
+    <section id="contact" style="margin-top: 100px;">
+        <div class="about-section" style="background: #ece9e0;">
+            <h2>Delivery & Pickup</h2>
+            <p>
+                We offer two convenient ways to get your books:<br>
+                📍 <strong>Free Pickup:</strong> Kuwait University (Shuwaikh or Khaldiya Campus).<br>
+                🚗 <strong>Home Delivery:</strong> Available across all Kuwait areas for a small fee.
+            </p>
+            <br>
+            <a href="https://wa.me/96551234567" class="order-btn" style="padding: 15px 40px; font-size: 1.1rem;">WhatsApp Us to Order</a>
         </div>
     </section>
+
 </div>
 
 <footer>
-    <p>© 2026 The Second Chapter | Shaima Alhubaishi - MSIT KU</p>
+    <p>© 2026 The Second Chapter | Shaima Alhubaishi</p>
+    <p>Empowering the reading community in Kuwait, one book at a time.</p>
 </footer>
 
 </body>
