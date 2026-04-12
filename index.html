@@ -27,16 +27,35 @@
         
         h2.section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 60px 0 30px; color: var(--primary); border-bottom: 3px solid var(--accent); padding-bottom: 10px; }
 
-        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; margin-bottom: 50px; }
-        .book-card { background: white; border-radius: 12px; overflow: hidden; transition: 0.4s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; display: flex; flex-direction: column; }
+        /* --- التنسيق الجديد والمتناسق للكتب --- */
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; margin-bottom: 50px; }
+        
+        .book-card { 
+            background: white; border-radius: 12px; overflow: hidden; transition: 0.4s; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; 
+            display: flex; flex-direction: column; height: 100%; /* توحيد الطول */
+        }
+        
         .book-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .book-card img { width: 100%; height: 280px; object-fit: cover; background: #eee; border-bottom: 1px solid #f0f0f0; }
         
-        .book-info { padding: 15px; text-align: center; flex-grow: 1; }
-        .book-info h3 { margin: 10px 0; font-size: 0.85rem; color: var(--primary); height: 40px; overflow: hidden; }
-        .price-tag { font-weight: bold; color: var(--accent); font-size: 1.1rem; margin-bottom: 10px; display: block; }
+        .book-image-container {
+            width: 100%; height: 280px; background: #fdfdfd; 
+            display: flex; align-items: center; justify-content: center;
+            border-bottom: 1px solid #f0f0f0; padding: 10px; box-sizing: border-box;
+        }
+
+        .book-card img { 
+            max-width: 100%; max-height: 100%; 
+            object-fit: contain; /* يضمن عدم قص الصورة أو تشوهها */
+        }
         
-        .order-btn { background: var(--primary); color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px; font-size: 0.75rem; transition: 0.3s; display: block; }
+        .book-info { padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .book-info h3 { margin: 10px 0; font-size: 0.9rem; color: var(--primary); font-weight: 600; }
+        
+        .price-tag { font-weight: bold; color: #e67e22; font-size: 1.1rem; margin-bottom: 5px; display: block; }
+        .pickup-note { font-size: 0.7rem; color: #27ae60; font-weight: bold; margin-bottom: 10px; }
+        
+        .order-btn { background: var(--primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 25px; font-size: 0.75rem; transition: 0.3s; display: block; }
         .order-btn:hover { background: var(--accent); }
 
         footer { background: var(--primary); color: white; text-align: center; padding: 60px 20px; margin-top: 80px; }
@@ -71,67 +90,77 @@
 
     <h2 class="section-title" id="arabic">Arabic & Egyptian Novels</h2>
     <div class="book-grid">
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400"><h3>بين القصرين - نجيب محفوظ</h3><span class="price-tag">2.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400"><h3>الفيل الأزرق - أحمد مراد</h3><span class="price-tag">3.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400"><h3>عمارة يعقوبيان - الأسواني</h3><span class="price-tag">2.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400"><h3>تراب الماس - أحمد مراد</h3><span class="price-tag">3.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400"><h3>ثلاثية غرناطة - رضوى عاشور</h3><span class="price-tag">4.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400" alt="بين القصرين"></div>
+            <div class="book-info"><h3>بين القصرين - نجيب محفوظ</h3><span class="price-tag">2.500 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678?text=أريد طلب كتاب: بين القصرين" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400" alt="الفيل الأزرق"></div>
+            <div class="book-info"><h3>الفيل الأزرق - أحمد مراد</h3><span class="price-tag">3.500 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678?text=أريد طلب كتاب: الفيل الأزرق" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400"></div>
+            <div class="book-info"><h3>عمارة يعقوبيان - الأسواني</h3><span class="price-tag">2.000 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400"></div>
+            <div class="book-info"><h3>تراب الماس - أحمد مراد</h3><span class="price-tag">3.000 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400"></div>
+            <div class="book-info"><h3>ثلاثية غرناطة - رضوى عاشور</h3><span class="price-tag">4.000 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
     </div>
 
     <h2 class="section-title" id="lit">English Literature</h2>
     <div class="book-grid">
-        <div class="book-card"><img src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=400"><h3>Pride & Prejudice - Austen</h3><span class="price-tag">1.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400"><h3>Great Expectations</h3><span class="price-tag">2.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400"><h3>Wuthering Heights</h3><span class="price-tag">3.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.pexels.com/photos/415071/pexels-photo-415071.jpeg?auto=compress&cs=tinysrgb&w=400"><h3>Jane Eyre - Brontë</h3><span class="price-tag">2.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1511108690759-009324a90311?w=400"><h3>1984 - George Orwell</h3><span class="price-tag">1.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-    </div>
-
-    <h2 class="section-title" id="ling">Linguistics</h2>
-    <div class="book-grid">
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=400"><h3>The Study of Language - Yule</h3><span class="price-tag">4.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1521714161819-15534968fc5f?w=400"><h3>How Language Works</h3><span class="price-tag">3.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1451226428352-cf66bf8a0317?w=400"><h3>Semantics Overview</h3><span class="price-tag">3.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=400"><h3>Phonetics Basics</h3><span class="price-tag">2.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400"><h3>Applied Linguistics Guide</h3><span class="price-tag">3.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-    </div>
-
-    <h2 class="section-title" id="media">Mass Communication & Media</h2>
-    <div class="book-grid">
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=400"><h3>Media Ethics</h3><span class="price-tag">2.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400"><h3>Digital Journalism</h3><span class="price-tag">3.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1557425955-df376b5903c8?w=400"><h3>Public Relations</h3><span class="price-tag">2.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?w=400"><h3>Mass Comm Theories</h3><span class="price-tag">3.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.pexels.com/photos/7680527/pexels-photo-7680527.jpeg?auto=compress&cs=tinysrgb&w=400"><h3>Advertising Basics</h3><span class="price-tag">1.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-    </div>
-
-    <h2 class="section-title" id="self">Self-Development</h2>
-    <div class="book-grid">
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1491841573634-28140fc7ced7?w=400"><h3>Atomic Habits</h3><span class="price-tag">3.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400"><h3>Think & Grow Rich</h3><span class="price-tag">2.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=400"><h3>Deep Work</h3><span class="price-tag">4.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.pexels.com/photos/4866043/pexels-photo-4866043.jpeg?auto=compress&cs=tinysrgb&w=400"><h3>The Power of Habit</h3><span class="price-tag">3.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=400"><h3>Mindset - Dweck</h3><span class="price-tag">2.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-    </div>
-
-    <h2 class="section-title" id="religion">Religious Studies</h2>
-    <div class="book-grid">
-        <div class="book-card"><img src="https://images.pexels.com/photos/8164742/pexels-photo-8164742.jpeg?auto=compress&cs=tinysrgb&w=400"><h3>تفسير القرآن الكريم</h3><span class="price-tag">3.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.pexels.com/photos/8164382/pexels-photo-8164382.jpeg?auto=compress&cs=tinysrgb&w=400"><h3>رياض الصالحين</h3><span class="price-tag">2.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=400"><h3>السيرة النبوية</h3><span class="price-tag">4.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.pexels.com/photos/10331070/pexels-photo-10331070.jpeg?auto=compress&cs=tinysrgb&w=400"><h3>لا تحزن - عائض القرني</h3><span class="price-tag">2.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.pexels.com/photos/8164381/pexels-photo-8164381.jpeg?auto=compress&cs=tinysrgb&w=400"><h3>الأربعون النووية</h3><span class="price-tag">1.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=400"></div>
+            <div class="book-info"><h3>Pride & Prejudice - Austen</h3><span class="price-tag">1.500 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678?text=Order: Pride and Prejudice" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400"></div>
+            <div class="book-info"><h3>Great Expectations</h3><span class="price-tag">2.500 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=400"></div>
+            <div class="book-info"><h3>Wuthering Heights</h3><span class="price-tag">3.000 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.pexels.com/photos/415071/pexels-photo-415071.jpeg?auto=compress&cs=tinysrgb&w=400"></div>
+            <div class="book-info"><h3>Jane Eyre - Brontë</h3><span class="price-tag">2.000 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1511108690759-009324a90311?w=400"></div>
+            <div class="book-info"><h3>1984 - George Orwell</h3><span class="price-tag">1.500 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
     </div>
 
     <h2 class="section-title" id="it">Information Technology</h2>
     <div class="book-grid">
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400"><h3>C++ Programming</h3><span class="price-tag">4.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400"><h3>Database Systems</h3><span class="price-tag">3.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400"><h3>Cyber Security</h3><span class="price-tag">3.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400"><h3>Intro to IT</h3><span class="price-tag">2.500 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
-        <div class="book-card"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400"><h3>Data Analysis</h3><span class="price-tag">4.000 KWD</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400"></div>
+            <div class="book-info"><h3>C++ Programming</h3><span class="price-tag">4.000 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678?text=Order: C++ Programming Book" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400"></div>
+            <div class="book-info"><h3>Database Systems</h3><span class="price-tag">3.500 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400"></div>
+            <div class="book-info"><h3>Cyber Security</h3><span class="price-tag">3.000 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400"></div>
+            <div class="book-info"><h3>Intro to IT</h3><span class="price-tag">2.500 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
+        <div class="book-card">
+            <div class="book-image-container"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400"></div>
+            <div class="book-info"><h3>Data Analysis</h3><span class="price-tag">4.000 KWD</span><p class="pickup-note">📍 Pickup: Shadadiya</p><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div>
+        </div>
     </div>
-   <div style="max-width: 1200px; margin: 50px auto; padding: 20px;">
+
+    <div style="max-width: 1200px; margin: 50px auto; padding: 20px;">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
             
             <div id="request" style="text-align: center;">
@@ -143,20 +172,30 @@
             <div id="location" style="text-align: center;">
                 <h2 style="font-family: 'Playfair Display', serif; color: #1a2a3a; border-bottom: 2px solid #c6934b; padding-bottom: 10px; margin-bottom: 20px;">Pickup Location</h2>
                 <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Visit us at Kuwait University - Shadadiya Campus:</p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3480.956637813083!2d47.89617267527635!3d29.28424267521762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf90022d4f801b%3A0xcc47e3a96860d5c0!2sKuwait%20University%20-%20Sabah%20Al-Salem%20University%20City!5e0!3m2!1sen
-                    !2skw!4v1714400000000!5m2!1sen!2skw" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3480.2033878272553!2d47.8931145!3d29.2025345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf197025877c4d%3A0x6b42b94680b5719e!2sSabah%20Al-Salem%20University%20City!5e0!3m2!1sen!2skw!4v1714400000000!5m2!1sen!2skw" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
 
         </div>
     </div>
 
-
 </div>
 
 <footer>
-    <p>© 2026 The Second Chapter | Shaima Alhubaishi</p>
+    <p>©️ 2026 The Second Chapter | Shaima Alhubaishi</p>
     <p>Empowering the reading community in Kuwait, one book at a time.</p>
 </footer>
+
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/65f1a9a19131ed19d97a666e/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
 
 </body>
 </html>
