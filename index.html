@@ -7,12 +7,13 @@
     <title>The Second Chapter | Shaima Alhubaishi</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1a2a3a; --accent: #c6934b; --bg: #f9f7f2; --text: #333; }
+        /* تم تغميق اللون الذهبي (accent) والرمادي قليلاً جداً لتجاوز اختبار التباين */
+        :root { --primary: #1a2a3a; --accent: #a66d2c; --bg: #f9f7f2; --text: #222; }
         body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--bg); color: var(--text); line-height: 1.6; scroll-behavior: smooth; }
         
         header { 
             height: 100vh; 
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2000'); 
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2000'); 
             background-size: cover; background-position: center; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
         }
@@ -30,17 +31,15 @@
 
         .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; margin-bottom: 50px; }
         
-        /* التعديل الإبداعي للتنسيق دون حذف */
         .book-card { 
             background: white; border-radius: 12px; overflow: hidden; transition: 0.4s; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #ddd; 
             display: flex; flex-direction: column; height: 100%; 
         }
         .book-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
         
-        /* حاوية الصور لضمان التناسق */
         .book-img-container {
-            width: 100%; height: 280px; background: #eee; 
+            width: 100%; height: 280px; background: #f0f0f0; 
             display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
         .book-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
@@ -48,12 +47,25 @@
         .book-info { padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .book-info h3 { margin: 10px 0; font-size: 0.85rem; color: var(--primary); height: 40px; overflow: hidden; }
         .price-tag { font-weight: bold; color: var(--accent); font-size: 1.1rem; margin-bottom: 10px; display: block; }
-        .pickup-badge { font-size: 0.65rem; color: #27ae60; font-weight: bold; margin-bottom: 8px; }
+        /* تم تعديل لون الأخضر ليكون أوضح للقراءة */
+        .pickup-badge { font-size: 0.65rem; color: #1e8449; font-weight: bold; margin-bottom: 8px; }
         
-        .order-btn { background: var(--primary); color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px; font-size: 0.75rem; transition: 0.3s; display: block; }
-        .order-btn:hover { background: var(--accent); }
+        .order-btn { 
+    background: var(--primary); 
+    color: white; 
+    padding: 8px 20px; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-size: 0.75rem; 
+    transition: 0.3s; 
+    display: inline-block; /* تم التعديل من block لضمان عدم تداخله */
+    border: none;
+    cursor: pointer;
+}
+.order-btn:hover { background: var(--accent); color: white; }
 
-        footer { background: var(--primary); color: white; text-align: center; padding: 60px 20px; margin-top: 80px; }
+footer { background: #121d28; color: white; text-align: center; padding: 60px 20px; margin-top: 80px; }
+        
     </style>
 </head>
 <body>
@@ -77,7 +89,7 @@
 
 <div class="container">
     
-    <section id="about" class="about-section">
+   <section id="about" class="about-section">
         <h2>Our Mission</h2>
         <p>
             Welcome to <strong>The Second Chapter</strong>. This platform is a personal initiative to share my carefully curated collection of books, which I have read and preserved. I believe that every book deserves a second life and a new home where it can continue to inspire. All books are offered at very affordable prices, ranging from 1.5 to 4.5 KWD. We offer free pickup at <strong>Kuwait University campuses</strong> or home delivery across Kuwait to make your reading journey easier.
@@ -86,11 +98,65 @@
 
    <h2 class="section-title" id="arabic">Arabic & Egyptian Novels</h2>
     <div class="book-grid">
-        <div class="book-card"><div class="book-img-container"><img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400" alt="Cover of the novel Bayn al-Qasrayn by Naguib Mahfouz"></div><div class="book-info"><h3>بين القصرين - نجيب محفوظ</h3><span class="price-tag">2.500 KWD</span><span class="pickup-badge">📍 Pickup: KU Campus</span><a href="https://wa.me/96512345678?text=Order: بين القصرين" class="order-btn" target="_blank">Order Now</a></div></div>
-        <div class="book-card"><div class="book-img-container"><img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400" alt="Cover of the novel The Blue Elephant by Ahmed Mourad"></div><div class="book-info"><h3>الفيل الأزرق - أحمد مراد</h3><span class="price-tag">3.500 KWD</span><span class="pickup-badge">📍 Pickup: KU Campus</span><a href="https://wa.me/96512345678?text=Order: الفيل الأزرق" class="order-btn" target="_blank">Order Now</a></div></div>
-        <div class="book-card"><div class="book-img-container"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400" alt="Cover of the novel The Yacoubian Building by Alaa Al Aswany"></div><div class="book-info"><h3>عمارة يعقوبيان - الأسواني</h3><span class="price-tag">2.000 KWD</span><span class="pickup-badge">📍 Pickup: KU Campus</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div></div>
-        <div class="book-card"><div class="book-img-container"><img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400" alt="Cover of the novel Diamond Dust by Ahmed Mourad"></div><div class="book-info"><h3>تراب الماس - أحمد مراد</h3><span class="price-tag">3.000 KWD</span><span class="pickup-badge">📍 Pickup: KU Campus</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div></div>
-        <div class="book-card"><div class="book-img-container"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400" alt="Cover of the novel Granada Trilogy by Radwa Ashour"></div><div class="book-info"><h3>ثلاثية غرناطة - رضوى عاشور</h3><span class="price-tag">4.000 KWD</span><span class="pickup-badge">📍 Pickup: KU Campus</span><a href="https://wa.me/96512345678" class="order-btn" target="_blank">Order Now</a></div></div>
+        <div class="book-card">
+            <div class="book-img-container">
+                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=400" alt="Novel: Bayn al-Qasrayn by Naguib Mahfouz">
+            </div>
+            <div class="book-info">
+                <h3>بين القصرين - نجيب محفوظ</h3>
+                <span class="price-tag">2.500 KWD</span>
+                <span class="pickup-badge">Pickup: KU Campus</span>
+                <a href="https://wa.me/96512345678?text=Order: بين القصرين" class="order-btn" target="_blank" aria-label="Order بين القصرين via WhatsApp">Order Now</a>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-img-container">
+                <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400" alt="Novel: The Blue Elephant by Ahmed Mourad">
+            </div>
+            <div class="book-info">
+                <h3>الفيل الأزرق - أحمد مراد</h3>
+                <span class="price-tag">3.500 KWD</span>
+                <span class="pickup-badge">Pickup: KU Campus</span>
+                <a href="https://wa.me/96512345678?text=Order: الفيل الأزرق" class="order-btn" target="_blank" aria-label="Order الفيل الأزرق via WhatsApp">Order Now</a>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-img-container">
+                <img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?w=400" alt="Novel: The Yacoubian Building by Alaa Al Aswany">
+            </div>
+            <div class="book-info">
+                <h3>عمارة يعقوبيان - الأسواني</h3>
+                <span class="price-tag">2.000 KWD</span>
+                <span class="pickup-badge">Pickup: KU Campus</span>
+                <a href="https://wa.me/96512345678" class="order-btn" target="_blank" aria-label="Order عمارة يعقوبيان via WhatsApp">Order Now</a>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-img-container">
+                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400" alt="Novel: Diamond Dust by Ahmed Mourad">
+            </div>
+            <div class="book-info">
+                <h3>تراب الماس - أحمد مراد</h3>
+                <span class="price-tag">3.000 KWD</span>
+                <span class="pickup-badge">Pickup: KU Campus</span>
+                <a href="https://wa.me/96512345678" class="order-btn" target="_blank" aria-label="Order تراب الماس via WhatsApp">Order Now</a>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-img-container">
+                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400" alt="Novel: Granada Trilogy by Radwa Ashour">
+            </div>
+            <div class="book-info">
+                <h3>ثلاثية غرناطة - رضوى عاشور</h3>
+                <span class="price-tag">4.000 KWD</span>
+                <span class="pickup-badge">Pickup: KU Campus</span>
+                <a href="https://wa.me/96512345678" class="order-btn" target="_blank" aria-label="Order ثلاثية غرناطة via WhatsApp">Order Now</a>
+            </div>
+        </div>
     </div>
     
    <h2 class="section-title" id="lit">English Literature</h2>
