@@ -45,11 +45,9 @@
         .summary-box { background: #f9f7f4; padding: 35px; border-radius: 20px; }
         .complete-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 22px; border-radius: 15px; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
 
-        /* Modal / Pop-up Styles */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
-        .modal-content { background: #fff; padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; text-align: left; }
+        .modal-content { background: #fff; padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; }
         .success-msg { display: none; text-align: center; padding: 50px; }
-        .success-msg h2 { color: #2ecc71; font-family: 'Playfair Display', serif; }
     </style>
 </head>
 <body>
@@ -76,9 +74,8 @@
             <div>
                 <h3 class="section-title">Shipping Information</h3>
                 <input type="text" id="cust-name" placeholder="Full Name" required>
-                <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8">
-                
-                <select id="cust-area">
+                <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8" required>
+                <select id="cust-area" required>
                     <option value="">Select Area in Kuwait</option>
                     <optgroup label="1. Asimah Governorate">
                         <option>Kuwait City</option><option>Dasman</option><option>Sharq</option><option>Bneid Al-Gar</option><option>Kaifan</option><option>Al-Shamiya</option><option>Al-Rawda</option><option>Al-Adailiya</option><option>Al-Khaldiya</option><option>Yarmouk</option><option>Cordoba</option><option>Surra</option>
@@ -99,8 +96,7 @@
                         <option>Jahra</option><option>Sulaibiya</option><option>Saad Al-Abdullah City</option><option>Taima</option><option>Al-Waha</option><option>Al-Naseem</option><option>Amghara</option>
                     </optgroup>
                 </select>
-
-                <input type="text" id="cust-address" placeholder="Block, Street, House No.">
+                <input type="text" id="cust-address" placeholder="Block, Street, House No." required>
 
                 <h3 class="section-title">Payment Method</h3>
                 <div class="method-box">
@@ -123,13 +119,13 @@
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <h3 class="section-title" style="font-size: 1.2rem;">Credit or debit card</h3>
-            <input type="text" placeholder="Cardholder Full Name" id="card-name-input">
-            <input type="text" placeholder="Card Number" maxlength="16">
+            <input type="text" id="p-card-name" placeholder="Name on Card" required>
+            <input type="text" id="p-card-num" placeholder="Card Number (16 digits)" maxlength="16" required>
             <div style="display:flex; gap:10px;">
-                <input type="text" placeholder="MM / YY" maxlength="5">
-                <input type="text" placeholder="CVV" maxlength="3">
+                <input type="text" id="p-card-date" placeholder="MM / YY" maxlength="5" required>
+                <input type="text" id="p-card-cvv" placeholder="CVV" maxlength="3" required>
             </div>
-            <button class="complete-btn" onclick="showSuccess()">Pay Now</button>
+            <button class="complete-btn" onclick="validateAndPay()">Pay Now</button>
             <button style="background:none; border:none; color:grey; cursor:pointer; width:100%; margin-top:10px;" onclick="closeModal()">Cancel</button>
         </div>
     </div>
@@ -171,15 +167,42 @@
     }
 
     function handleOrder() {
-        const nameInput = document.getElementById('cust-name').value;
-        if(!nameInput) { alert("Please enter your full name"); return; }
+        const name = document.getElementById('cust-name').value;
+        const phone = document.getElementById('phone').value;
+        const area = document.getElementById('cust-area').value;
+        const address = document.getElementById('cust-address').value;
+
+        // التحقق من السلة
+        if(cart.length === 0) {
+            alert("Your cart is empty! Please add at least one book.");
+            return;
+        }
+
+        // التحقق من معلومات الشحن
+        if(!name || phone.length < 8 || !area || !address) {
+            alert("Please fill in all shipping information correctly (Name, 8-digit Phone, Area, and Address).");
+            return;
+        }
         
         if(selectedMethod === 'knet') {
-            document.getElementById('card-name-input').value = nameInput;
             document.getElementById('paymentModal').style.display = 'flex';
         } else {
             showSuccess();
         }
+    }
+
+    function validateAndPay() {
+        const cName = document.getElementById('p-card-name').value;
+        const cNum = document.getElementById('p-card-num').value;
+        const cDate = document.getElementById('p-card-date').value;
+        const cCvv = document.getElementById('p-card-cvv').value;
+
+        // التحقق من معلومات الكي نت
+        if(!cName || cNum.length < 16 || !cDate || cCvv.length < 3) {
+            alert("Please enter complete card details (16-digit Card Number and CVV).");
+            return;
+        }
+        showSuccess();
     }
 
     function closeModal() { document.getElementById('paymentModal').style.display = 'none'; }
@@ -187,7 +210,6 @@
     function showSuccess() {
         const nameInput = document.getElementById('cust-name').value;
         document.getElementById('success-user-name').innerText = "Thank You, " + nameInput + "!";
-        
         document.getElementById('paymentModal').style.display = 'none';
         document.getElementById('main-store-ui').style.display = 'none';
         document.getElementById('books-section').style.display = 'none';
