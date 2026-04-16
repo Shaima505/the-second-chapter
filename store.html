@@ -8,7 +8,7 @@
     <style>
         :root { 
             --primary: #1a2a3a; 
-            --accent: #8b5a2b; /* تم تعميق اللون الذهبي قليلاً لتحقيق تباين أفضل للقراءة */
+            --accent: #8b5a2b; 
             --bg: #fdfbf7; 
             --soft-gold: #f4ede3;
             --text-dark: #121212;
@@ -23,7 +23,6 @@
             scroll-behavior: smooth; 
         }
 
-        /* تحسين التباين في الهيدر */
         header { 
             background: var(--primary); 
             color: #ffffff; 
@@ -34,9 +33,20 @@
 
         header h1 { 
             font-family: 'Playfair Display', serif; 
-            font-size: clamp(2rem, 8vw, 3.5rem); /* خط مرن يتناسب مع الشاشات */
+            font-size: clamp(2rem, 8vw, 3.5rem); 
             margin: 0;
             letter-spacing: 2px;
+        }
+
+        /* إضافة الشعار الجديد تحت العنوان */
+        .slogan {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--soft-gold);
+            margin-top: 10px;
+            display: block;
+            letter-spacing: 1px;
         }
 
         .container { max-width: 1200px; margin: -40px auto 4rem; padding: 0 25px; }
@@ -60,10 +70,9 @@
             flex-direction: column;
         }
 
-        .book-card:hover, .book-card:focus-within { 
+        .book-card:hover { 
             transform: translateY(-10px); 
             box-shadow: 0 20px 40px rgba(26, 42, 58, 0.1);
-            outline: 2px solid var(--accent); /* توضيح التركيز لمستخدمي الكيبورد */
         }
 
         .book-card img { 
@@ -89,12 +98,10 @@
             cursor: pointer; 
             font-weight: bold;
             transition: 0.3s;
-            letter-spacing: 1px;
         }
 
         .order-btn:hover { background: var(--accent); }
 
-        /* نموذج الدفع */
         .checkout-container { 
             display: grid; 
             grid-template-columns: 1.6fr 1fr; 
@@ -119,65 +126,53 @@
             width: 100%; padding: 16px; margin-bottom: 20px; 
             border: 2px solid #ececec; border-radius: 12px; 
             background: #fafafa; font-family: inherit;
-            color: var(--text-dark);
-        }
-
-        input:focus, select:focus {
-            border-color: var(--accent);
-            outline: none;
-            background: #fff;
         }
 
         .method-box { display: flex; gap: 15px; margin-bottom: 25px; }
         .method { 
             border: 2px solid #f0f0f0; padding: 15px; border-radius: 12px; 
             cursor: pointer; flex: 1; text-align: center; transition: 0.3s;
+            background: none; font-family: inherit; font-size: 1rem;
         }
-        .method.active { border-color: var(--accent); background: #fffbf5; font-weight: bold; }
+        .method.active { border-color: var(--accent); background: #fffbf5; font-weight: bold; color: var(--accent); }
 
         .summary-box { background: #f9f7f4; padding: 35px; border-radius: 20px; }
 
         .complete-btn { 
             width: 100%; background: var(--primary); color: white; border: none; padding: 22px; 
             border-radius: 15px; font-size: 1.2rem; cursor: pointer; font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-
-        /* تحسين التصفح لمستخدمي الكيبورد */
-        :focus { outline: 3px solid var(--accent); outline-offset: 2px; }
 
         @media (max-width: 900px) { .checkout-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<header role="banner">
+<header>
     <h1>The Second Chapter Bookstore</h1>
-    <p>Curated Stories & Academic Excellence</p>
+    <span class="slogan">Making reading accessible and sustainable</span>
 </header>
 
-<main class="container" role="main">
-    <section class="books-grid" aria-label="Available Books">
-        <div class="book-card"><img src="1984.jpg" alt="Book cover of 1984"><h3>1984 - George Orwell</h3><span class="price-tag">1.500 KWD</span><button class="order-btn" onclick="addToCart('1984', 1.500)">ADD TO CART</button></div>
-        <div class="book-card"><img src="atomic.jpg" alt="Book cover of Atomic Habits"><h3>Atomic Habits</h3><span class="price-tag">3.500 KWD</span><button class="order-btn" onclick="addToCart('Atomic Habits', 3.500)">ADD TO CART</button></div>
-        <div class="book-card"><img src="expectations.jpg" alt="Book cover of Great Expectations"><h3>Great Expectations</h3><span class="price-tag">2.000 KWD</span><button class="order-btn" onclick="addToCart('Great Expectations', 2.000)">ADD TO CART</button></div>
-        <div class="book-card"><img src="habit_power.jpg" alt="Book cover of The Power of Habit"><h3>The Power of Habit</h3><span class="price-tag">3.000 KWD</span><button class="order-btn" onclick="addToCart('The Power of Habit', 3.000)">ADD TO CART</button></div>
-        <div class="book-card"><img src="mindest.jpg" alt="Book cover of Mindset"><h3>Mindset</h3><span class="price-tag">2.500 KWD</span><button class="order-btn" onclick="addToCart('Mindset', 2.500)">ADD TO CART</button></div>
-        <div class="book-card"><img src="pride.jpg" alt="Book cover of Pride & Prejudice"><h3>Pride & Prejudice</h3><span class="price-tag">1.500 KWD</span><button class="order-btn" onclick="addToCart('Pride & Prejudice', 1.500)">ADD TO CART</button></div>
-        <div class="book-card"><img src="think.jpg" alt="Book cover of Think & Grow Rich"><h3>Think & Grow Rich</h3><span class="price-tag">2.500 KWD</span><button class="order-btn" onclick="addToCart('Think & Grow Rich', 2.500)">ADD TO CART</button></div>
-        <div class="book-card"><img src="pr.jpg" alt="Book cover of Public Relations"><h3>Public Relations</h3><span class="price-tag">2.000 KWD</span><button class="order-btn" onclick="addToCart('Public Relations', 2.000)">ADD TO CART</button></div>
+<main class="container">
+    <section class="books-grid">
+        <div class="book-card"><img src="1984.jpg" alt="1984"><h3>1984 - George Orwell</h3><span class="price-tag">1.500 KWD</span><button class="order-btn" onclick="addToCart('1984', 1.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="atomic.jpg" alt="Atomic Habits"><h3>Atomic Habits</h3><span class="price-tag">3.500 KWD</span><button class="order-btn" onclick="addToCart('Atomic Habits', 3.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="expectations.jpg" alt="Great Expectations"><h3>Great Expectations</h3><span class="price-tag">2.000 KWD</span><button class="order-btn" onclick="addToCart('Great Expectations', 2.000)">ADD TO CART</button></div>
+        <div class="book-card"><img src="habit_power.jpg" alt="The Power of Habit"><h3>The Power of Habit</h3><span class="price-tag">3.000 KWD</span><button class="order-btn" onclick="addToCart('The Power of Habit', 3.000)">ADD TO CART</button></div>
+        <div class="book-card"><img src="mindest.jpg" alt="Mindset"><h3>Mindset</h3><span class="price-tag">2.500 KWD</span><button class="order-btn" onclick="addToCart('Mindset', 2.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="pride.jpg" alt="Pride & Prejudice"><h3>Pride & Prejudice</h3><span class="price-tag">1.500 KWD</span><button class="order-btn" onclick="addToCart('Pride & Prejudice', 1.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="think.jpg" alt="Think & Grow Rich"><h3>Think & Grow Rich</h3><span class="price-tag">2.500 KWD</span><button class="order-btn" onclick="addToCart('Think & Grow Rich', 2.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="pr.jpg" alt="Public Relations"><h3>Public Relations</h3><span class="price-tag">2.000 KWD</span><button class="order-btn" onclick="addToCart('Public Relations', 2.000)">ADD TO CART</button></div>
     </section>
 
     <div id="checkout-section" class="checkout-container">
-        <form onsubmit="return false;">
+        <div>
             <h3 class="section-title">Shipping Information</h3>
-            <label for="full-name" style="display:none;">Full Name</label>
-            <input type="text" id="full-name" placeholder="Full Name" required aria-required="true">
+            <input type="text" placeholder="Full Name" required id="cust-name">
+            <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
             
-            <label for="phone" style="display:none;">WhatsApp Number</label>
-            <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required aria-required="true">
-            
-            <label for="area" style="display:none;">Select Area</label>
-            <select id="area" required aria-required="true">
+            <select id="cust-area" required>
                 <option value="">Select Area in Kuwait</option>
                 <optgroup label="1. Asimah Governorate">
                     <option>Kuwait City</option><option>Dasman</option><option>Sharq</option><option>Bneid Al-Gar</option><option>Kaifan</option><option>Al-Shamiya</option><option>Al-Rawda</option><option>Al-Adailiya</option><option>Al-Khaldiya</option><option>Yarmouk</option><option>Cordoba</option><option>Surra</option>
@@ -198,24 +193,22 @@
                     <option>Jahra</option><option>Sulaibiya</option><option>Saad Al-Abdullah City</option><option>Taima</option><option>Al-Waha</option><option>Al-Naseem</option><option>Amghara</option>
                 </optgroup>
             </select>
-            
-            <label for="address" style="display:none;">Address Details</label>
-            <input type="text" id="address" placeholder="Block, Street, House No." required aria-required="true">
+            <input type="text" placeholder="Block, Street, House No." required id="cust-address">
 
             <h3 class="section-title">Payment Method</h3>
-            <div class="method-box" role="radiogroup">
-                <button type="button" class="method active" onclick="setPayment(this)" aria-checked="true">K-Net Link</button>
-                <button type="button" class="method" onclick="setPayment(this)" aria-checked="false">Cash on Delivery</button>
+            <div class="method-box">
+                <button type="button" class="method active" id="knet-btn" onclick="setPayment('knet')">K-Net Link</button>
+                <button type="button" class="method" id="cash-btn" onclick="setPayment('cash')">Cash on Delivery</button>
             </div>
-            <button class="complete-btn" onclick="confirmOrder()">Confirm Order</button>
-        </form>
+            <button class="complete-btn" onclick="processOrder()">Complete Order</button>
+        </div>
 
-        <aside class="summary-box" aria-labelledby="summary-title">
-            <h3 id="summary-title" class="section-title">Your Cart</h3>
-            <div id="cart-items-list" aria-live="polite"><p style="color: #666; text-align: center;">Choose your favorite books.</p></div>
-            <div style="margin-top: 20px;">
+        <aside class="summary-box">
+            <h3 class="section-title">Your Cart</h3>
+            <div id="cart-items-list"><p style="color: #666; text-align: center;">Your oasis is empty.</p></div>
+            <div style="margin-top: 20px; border-top: 2px solid var(--soft-gold); padding-top: 15px;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span>Delivery:</span><span>2.000 KWD</span></div>
-                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.6rem; border-top: 2px solid var(--soft-gold); padding-top: 15px;">
+                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.6rem;">
                     <span>Total:</span><span id="grand-total">2.000 KWD</span>
                 </div>
             </div>
@@ -226,11 +219,14 @@
 <script>
     let cart = [];
     let delivery = 2.000;
+    let selectedMethod = 'knet';
+
     function addToCart(name, price) {
         cart.push({name, price});
         updateSummary();
         document.getElementById('checkout-section').scrollIntoView({ behavior: 'smooth' });
     }
+
     function updateSummary() {
         const list = document.getElementById('cart-items-list');
         const totalDisplay = document.getElementById('grand-total');
@@ -242,18 +238,29 @@
         });
         totalDisplay.innerText = (subtotal + delivery).toFixed(3) + " KWD";
     }
-    function setPayment(el) {
-        document.querySelectorAll('.method').forEach(m => {
-            m.classList.remove('active');
-            m.setAttribute('aria-checked', 'false');
-        });
-        el.classList.add('active');
-        el.setAttribute('aria-checked', 'true');
+
+    function setPayment(method) {
+        selectedMethod = method;
+        document.getElementById('knet-btn').classList.toggle('active', method === 'knet');
+        document.getElementById('cash-btn').classList.toggle('active', method === 'cash');
     }
-    function confirmOrder() {
+
+    function processOrder() {
         const phone = document.getElementById('phone').value;
-        if(phone.length < 8) { alert("Please enter a valid 8-digit Kuwaiti number."); return; }
-        alert('Thank you! Order received.');
+        const name = document.getElementById('cust-name').value;
+        
+        if(!name || phone.length < 8) {
+            alert("Please fill in your details correctly.");
+            return;
+        }
+
+        if(selectedMethod === 'knet') {
+            // هنا نضع الرابط الذي سيفتح عند اختيار كي-نت
+            alert("Redirecting to K-Net Payment Gateway...");
+            window.open("https://www.knet.com.kw/", "_blank"); 
+        } else {
+            alert("Thank you! Order confirmed. We will contact you soon for Cash on Delivery.");
+        }
     }
 </script>
 </body>
