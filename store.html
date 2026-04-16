@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Second Chapter | Bookstore</title>
+    <style>
+        :root { --primary: #1a2a3a; --accent: #c6934b; --bg: #f9f7f2; --text: #333; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; padding: 0; color: var(--text); }
+        
+        header { background: var(--primary); color: white; text-align: center; padding: 2rem 1rem; position: relative; }
+        .back-link { position: absolute; left: 20px; top: 20px; color: white; text-decoration: none; border: 1px solid white; padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; }
+        
+        .container { max-width: 1100px; margin: 3rem auto; padding: 0 20px; }
+        .store-title { text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: var(--primary); }
+
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; }
+        
+        .book-card { background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; }
+        .book-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        
+        .book-card img { width: 100%; height: 280px; object-fit: contain; margin-bottom: 15px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        .book-card h3 { font-size: 1.1rem; margin: 10px 0; height: 50px; overflow: hidden; }
+        .price { color: var(--accent); font-weight: bold; font-size: 1.3rem; display: block; margin-bottom: 15px; }
+        
+        .order-btn { display: block; background: #25d366; color: white !important; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; transition: 0.3s; }
+        .order-btn:hover { background: #128c7e; }
+
+        .footer-info { margin-top: 4rem; text-align: center; background: white; padding: 20px; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-link">← Back Home</a>
+    <h1>The Second Chapter Store</h1>
+</header>
+
+<div class="container">
+    <h2 class="store-title">Selected Collection</h2>
+    
+    <div class="book-grid">
+        <div class="book-card">
+            <img src="1984.jpg" alt="1984">
+            <h3>1984 - George Orwell</h3>
+            <span class="price">1.500 KWD</span>
+            <a href="https://wa.me/965XXXXXXXX?text=I%20want%20to%20order%201984" class="order-btn">Order via WhatsApp</a>
+        </div>
+
+        <div class="book-card">
+            <img src="atomic.jpg" alt="Atomic Habits">
+            <h3>Atomic Habits</h3>
+            <span class="price">3.500 KWD</span>
+            <a href="https://wa.me/965XXXXXXXX?text=I%20want%20to%20order%20Atomic%20Habits" class="order-btn">Order via WhatsApp</a>
+        </div>
+
+        <div class="book-card">
+            <img src="pride.jpg" alt="Pride and Prejudice">
+            <h3>Pride & Prejudice</h3>
+            <span class="price">1.500 KWD</span>
+            <a href="https://wa.me/965XXXXXXXX?text=I%20want%20to%20order%20Pride%20and%20Prejudice" class="order-btn">Order via WhatsApp</a>
+        </div>
+
+        <div class="book-card">
+            <img src="habit_power.jpg" alt="The Power of Habit">
+            <h3>The Power of Habit</h3>
+            <span class="price">3.000 KWD</span>
+            <a href="https://wa.me/965XXXXXXXX?text=I%20want%20to%20order%20The%20Power%20of%20Habit" class="order-btn">Order via WhatsApp</a>
+        </div>
+    </div>
+
+    <div class="footer-info">
+        <p><strong>Payment:</strong> Cash on Delivery / K-Net Link | <strong>Delivery:</strong> 24-48 Hours</p>
+    </div>
+</div>
+
+</body>
+</html>
