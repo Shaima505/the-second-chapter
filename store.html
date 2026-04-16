@@ -3,60 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Second Chapter | Store Oasis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>The Second Chapter | Bookstore Oasis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1a2a3a; --accent: #a66d2c; --bg: #fdfbf7; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); background-image: url('https://www.transparenttextures.com/patterns/paper.png'); margin: 0; color: #333; scroll-behavior: smooth; }
-        header { background: var(--primary); color: white; padding: 3rem 1rem; text-align: center; }
-        header h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin: 0; }
-        .container { max-width: 1100px; margin: 2rem auto; padding: 0 20px; }
-        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; margin-bottom: 50px; }
-        .book-card { background: white; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid rgba(166, 109, 44, 0.1); display: flex; flex-direction: column; justify-content: space-between; }
-        .book-card img { width: 100%; height: 250px; object-fit: contain; margin-bottom: 15px; }
-        .book-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--primary); margin: 0 0 10px 0; height: 50px; overflow: hidden; }
-        .price-tag { color: var(--accent); font-weight: 600; margin-bottom: 15px; display: block; }
-        .order-btn { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; width: 100%; font-weight: bold; margin-top: auto; }
+        :root { 
+            --primary: #1a2a3a; 
+            --accent: #8b5a2b; /* تم تعميق اللون الذهبي قليلاً لتحقيق تباين أفضل للقراءة */
+            --bg: #fdfbf7; 
+            --soft-gold: #f4ede3;
+            --text-dark: #121212;
+        }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--bg); 
+            background-image: url('https://www.transparenttextures.com/patterns/paper.png'); 
+            margin: 0; 
+            color: var(--text-dark); 
+            scroll-behavior: smooth; 
+        }
+
+        /* تحسين التباين في الهيدر */
+        header { 
+            background: var(--primary); 
+            color: #ffffff; 
+            padding: 5rem 1rem; 
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        header h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2rem, 8vw, 3.5rem); /* خط مرن يتناسب مع الشاشات */
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .container { max-width: 1200px; margin: -40px auto 4rem; padding: 0 25px; }
+
+        .books-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
+            gap: 35px; 
+            margin-bottom: 70px; 
+        }
+
+        .book-card { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 20px; 
+            text-align: center; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            border: 1px solid var(--soft-gold); 
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-card:hover, .book-card:focus-within { 
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 40px rgba(26, 42, 58, 0.1);
+            outline: 2px solid var(--accent); /* توضيح التركيز لمستخدمي الكيبورد */
+        }
+
+        .book-card img { 
+            width: 100%; 
+            height: 280px; 
+            object-fit: contain; 
+            margin-bottom: 20px;
+        }
+
+        .price-tag { 
+            font-size: 1.25rem;
+            color: var(--accent); 
+            font-weight: 600; 
+            margin-bottom: 20px; 
+        }
+
+        .order-btn { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 14px; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            font-weight: bold;
+            transition: 0.3s;
+            letter-spacing: 1px;
+        }
+
         .order-btn:hover { background: var(--accent); }
-        .checkout-container { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-top: 4px solid var(--accent); }
-        .section-title { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.4rem; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        input, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-family: inherit; font-size: 0.9rem; }
-        .method-box { display: flex; gap: 10px; margin-bottom: 20px; }
-        .method { border: 2px solid #eee; padding: 12px; border-radius: 8px; cursor: pointer; flex: 1; text-align: center; }
-        .method.active { border-color: var(--accent); background: #fff9f2; color: var(--accent); font-weight: bold; }
-        .summary-box { background: #fafafa; padding: 25px; border-radius: 15px; border: 1px dashed var(--accent); }
-        .cart-item { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .total-price { font-size: 1.4rem; font-weight: bold; color: var(--primary); margin-top: 15px; display: flex; justify-content: space-between; }
-        .complete-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 18px; border-radius: 10px; font-size: 1.1rem; cursor: pointer; font-weight: bold; margin-top: 20px; }
-        @media (max-width: 850px) { .checkout-container { grid-template-columns: 1fr; } }
+
+        /* نموذج الدفع */
+        .checkout-container { 
+            display: grid; 
+            grid-template-columns: 1.6fr 1fr; 
+            gap: 40px; 
+            background: white; 
+            padding: 45px; 
+            border-radius: 30px; 
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border: 1px solid var(--soft-gold);
+        }
+
+        .section-title { 
+            font-family: 'Playfair Display', serif; 
+            color: var(--primary); 
+            font-size: 1.8rem; 
+            margin-bottom: 25px; 
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        input, select { 
+            width: 100%; padding: 16px; margin-bottom: 20px; 
+            border: 2px solid #ececec; border-radius: 12px; 
+            background: #fafafa; font-family: inherit;
+            color: var(--text-dark);
+        }
+
+        input:focus, select:focus {
+            border-color: var(--accent);
+            outline: none;
+            background: #fff;
+        }
+
+        .method-box { display: flex; gap: 15px; margin-bottom: 25px; }
+        .method { 
+            border: 2px solid #f0f0f0; padding: 15px; border-radius: 12px; 
+            cursor: pointer; flex: 1; text-align: center; transition: 0.3s;
+        }
+        .method.active { border-color: var(--accent); background: #fffbf5; font-weight: bold; }
+
+        .summary-box { background: #f9f7f4; padding: 35px; border-radius: 20px; }
+
+        .complete-btn { 
+            width: 100%; background: var(--primary); color: white; border: none; padding: 22px; 
+            border-radius: 15px; font-size: 1.2rem; cursor: pointer; font-weight: bold;
+        }
+
+        /* تحسين التصفح لمستخدمي الكيبورد */
+        :focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+        @media (max-width: 900px) { .checkout-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>The Second Chapter</h1>
-    <p>Selected Collection & Design Oasis</p>
+<header role="banner">
+    <h1>The Second Chapter Bookstore</h1>
+    <p>Curated Stories & Academic Excellence</p>
 </header>
 
-<div class="container">
-    <div class="books-grid">
-        <div class="book-card"><img src="1984.jpg"><h3>1984 - George Orwell</h3><span class="price-tag">1.500 KWD</span><button class="order-btn" onclick="addToCart('1984', 1.500)">ORDER NOW</button></div>
-        <div class="book-card"><img src="atomic.jpg"><h3>Atomic Habits</h3><span class="price-tag">3.500 KWD</span><button class="order-btn" onclick="addToCart('Atomic Habits', 3.500)">ORDER NOW</button></div>
-        <div class="book-card"><img src="expectations.jpg"><h3>Great Expectations</h3><span class="price-tag">2.000 KWD</span><button class="order-btn" onclick="addToCart('Great Expectations', 2.000)">ORDER NOW</button></div>
-        <div class="book-card"><img src="habit_power.jpg"><h3>The Power of Habit</h3><span class="price-tag">3.000 KWD</span><button class="order-btn" onclick="addToCart('The Power of Habit', 3.000)">ORDER NOW</button></div>
-        <div class="book-card"><img src="mindest.jpg"><h3>Mindset</h3><span class="price-tag">2.500 KWD</span><button class="order-btn" onclick="addToCart('Mindset', 2.500)">ORDER NOW</button></div>
-        <div class="book-card"><img src="pride.jpg"><h3>Pride & Prejudice</h3><span class="price-tag">1.500 KWD</span><button class="order-btn" onclick="addToCart('Pride & Prejudice', 1.500)">ORDER NOW</button></div>
-        <div class="book-card"><img src="think.jpg"><h3>Think & Grow Rich</h3><span class="price-tag">2.500 KWD</span><button class="order-btn" onclick="addToCart('Think & Grow Rich', 2.500)">ORDER NOW</button></div>
-        <div class="book-card"><img src="pr.jpg"><h3>Public Relations</h3><span class="price-tag">2.000 KWD</span><button class="order-btn" onclick="addToCart('Public Relations', 2.000)">ORDER NOW</button></div>
-    </div>
+<main class="container" role="main">
+    <section class="books-grid" aria-label="Available Books">
+        <div class="book-card"><img src="1984.jpg" alt="Book cover of 1984"><h3>1984 - George Orwell</h3><span class="price-tag">1.500 KWD</span><button class="order-btn" onclick="addToCart('1984', 1.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="atomic.jpg" alt="Book cover of Atomic Habits"><h3>Atomic Habits</h3><span class="price-tag">3.500 KWD</span><button class="order-btn" onclick="addToCart('Atomic Habits', 3.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="expectations.jpg" alt="Book cover of Great Expectations"><h3>Great Expectations</h3><span class="price-tag">2.000 KWD</span><button class="order-btn" onclick="addToCart('Great Expectations', 2.000)">ADD TO CART</button></div>
+        <div class="book-card"><img src="habit_power.jpg" alt="Book cover of The Power of Habit"><h3>The Power of Habit</h3><span class="price-tag">3.000 KWD</span><button class="order-btn" onclick="addToCart('The Power of Habit', 3.000)">ADD TO CART</button></div>
+        <div class="book-card"><img src="mindest.jpg" alt="Book cover of Mindset"><h3>Mindset</h3><span class="price-tag">2.500 KWD</span><button class="order-btn" onclick="addToCart('Mindset', 2.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="pride.jpg" alt="Book cover of Pride & Prejudice"><h3>Pride & Prejudice</h3><span class="price-tag">1.500 KWD</span><button class="order-btn" onclick="addToCart('Pride & Prejudice', 1.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="think.jpg" alt="Book cover of Think & Grow Rich"><h3>Think & Grow Rich</h3><span class="price-tag">2.500 KWD</span><button class="order-btn" onclick="addToCart('Think & Grow Rich', 2.500)">ADD TO CART</button></div>
+        <div class="book-card"><img src="pr.jpg" alt="Book cover of Public Relations"><h3>Public Relations</h3><span class="price-tag">2.000 KWD</span><button class="order-btn" onclick="addToCart('Public Relations', 2.000)">ADD TO CART</button></div>
+    </section>
 
     <div id="checkout-section" class="checkout-container">
-        <div>
-            <h3 class="section-title">1. Shipping Details</h3>
-            <input type="text" placeholder="Full Name" required>
-            <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+        <form onsubmit="return false;">
+            <h3 class="section-title">Shipping Information</h3>
+            <label for="full-name" style="display:none;">Full Name</label>
+            <input type="text" id="full-name" placeholder="Full Name" required aria-required="true">
             
-            <select required>
+            <label for="phone" style="display:none;">WhatsApp Number</label>
+            <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required aria-required="true">
+            
+            <label for="area" style="display:none;">Select Area</label>
+            <select id="area" required aria-required="true">
                 <option value="">Select Area in Kuwait</option>
                 <optgroup label="1. Asimah Governorate">
                     <option>Kuwait City</option><option>Dasman</option><option>Sharq</option><option>Bneid Al-Gar</option><option>Kaifan</option><option>Al-Shamiya</option><option>Al-Rawda</option><option>Al-Adailiya</option><option>Al-Khaldiya</option><option>Yarmouk</option><option>Cordoba</option><option>Surra</option>
@@ -68,7 +189,7 @@
                     <option>Farwaniya</option><option>Khaitan</option><option>Andalous</option><option>Jleeb Al-Shuyoukh</option><option>Ardiya</option><option>Sabah Al-Nasser</option><option>Rabiya</option><option>Omariya</option><option>Al-Rehab</option><option>Al-Rai</option>
                 </optgroup>
                 <optgroup label="4. Mubarak Al-Kabeer Governorate">
-                    <option>Mubarak Al-Kabeer</option><option>Sabah Al-Salem</option><option>Al-Adan</option><option>Al-Qurain</option><option>Al-Qusour</option><option>Abu Fatira</option><option>Al-Fintas (Partially)</option><option>Al-Masayel</option>
+                    <option>Mubarak Al-Kabeer</option><option>Sabah Al-Salem</option><option>Al-Adan</option><option>Al-Qurain</option><option>Al-Qusour</option><option>Abu Fatira</option><option>Al-Fintas</option><option>Al-Masayel</option>
                 </optgroup>
                 <optgroup label="5. Ahmadi Governorate">
                     <option>Ahmadi</option><option>Fahaheel</option><option>Mangaf</option><option>Abu Halifa</option><option>Sabah Al-Ahmad City</option><option>Khiran</option><option>Wafra</option><option>Mahboula</option><option>Al-Eqaila</option>
@@ -77,26 +198,30 @@
                     <option>Jahra</option><option>Sulaibiya</option><option>Saad Al-Abdullah City</option><option>Taima</option><option>Al-Waha</option><option>Al-Naseem</option><option>Amghara</option>
                 </optgroup>
             </select>
-            <input type="text" placeholder="Block, Street, House No." required>
+            
+            <label for="address" style="display:none;">Address Details</label>
+            <input type="text" id="address" placeholder="Block, Street, House No." required aria-required="true">
 
-            <h3 class="section-title" style="margin-top:20px;">2. Payment Option</h3>
-            <div class="method-box">
-                <div class="method active" onclick="setPayment(this)">K-Net Link</div>
-                <div class="method" onclick="setPayment(this)">Cash on Delivery</div>
+            <h3 class="section-title">Payment Method</h3>
+            <div class="method-box" role="radiogroup">
+                <button type="button" class="method active" onclick="setPayment(this)" aria-checked="true">K-Net Link</button>
+                <button type="button" class="method" onclick="setPayment(this)" aria-checked="false">Cash on Delivery</button>
             </div>
-            <button class="complete-btn" onclick="confirmOrder()">Place Order</button>
-        </div>
+            <button class="complete-btn" onclick="confirmOrder()">Confirm Order</button>
+        </form>
 
-        <div class="summary-box">
-            <h3 class="section-title">Order Summary</h3>
-            <div id="cart-items-list"><p style="color: #999; text-align: center;">Your cart is empty.</p></div>
-            <div style="margin-top: 15px; border-top: 1px solid #ddd; padding-top: 10px;">
-                <div class="cart-item"><span>Delivery:</span><span>2.000 KWD</span></div>
-                <div class="total-price"><span>Total:</span><span id="grand-total">2.000 KWD</span></div>
+        <aside class="summary-box" aria-labelledby="summary-title">
+            <h3 id="summary-title" class="section-title">Your Cart</h3>
+            <div id="cart-items-list" aria-live="polite"><p style="color: #666; text-align: center;">Choose your favorite books.</p></div>
+            <div style="margin-top: 20px;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span>Delivery:</span><span>2.000 KWD</span></div>
+                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.6rem; border-top: 2px solid var(--soft-gold); padding-top: 15px;">
+                    <span>Total:</span><span id="grand-total">2.000 KWD</span>
+                </div>
             </div>
-        </div>
+        </aside>
     </div>
-</div>
+</main>
 
 <script>
     let cart = [];
@@ -113,18 +238,22 @@
         let subtotal = 0;
         cart.forEach(item => {
             subtotal += item.price;
-            list.innerHTML += `<div class="cart-item"><span>${item.name}</span><span>${item.price.toFixed(3)} KWD</span></div>`;
+            list.innerHTML += `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>${item.name}</span><span>${item.price.toFixed(3)} KWD</span></div>`;
         });
         totalDisplay.innerText = (subtotal + delivery).toFixed(3) + " KWD";
     }
     function setPayment(el) {
-        document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
+        document.querySelectorAll('.method').forEach(m => {
+            m.classList.remove('active');
+            m.setAttribute('aria-checked', 'false');
+        });
         el.classList.add('active');
+        el.setAttribute('aria-checked', 'true');
     }
     function confirmOrder() {
         const phone = document.getElementById('phone').value;
         if(phone.length < 8) { alert("Please enter a valid 8-digit Kuwaiti number."); return; }
-        alert('Order Placed Successfully! Total: ' + document.getElementById('grand-total').innerText);
+        alert('Thank you! Order received.');
     }
 </script>
 </body>
