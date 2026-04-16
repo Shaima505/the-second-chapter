@@ -18,133 +18,41 @@
             font-family: 'Poppins', sans-serif; 
             background-color: var(--bg); 
             background-image: url('https://www.transparenttextures.com/patterns/paper.png'); 
-            margin: 0; 
-            color: var(--text-dark); 
-            scroll-behavior: smooth; 
+            margin: 0; color: var(--text-dark); scroll-behavior: smooth; 
         }
 
-        header { 
-            background: var(--primary); 
-            color: #ffffff; 
-            padding: 5rem 1rem; 
-            text-align: center;
-            border-bottom: 5px solid var(--accent);
-        }
-
-        header h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(2rem, 8vw, 3.5rem); 
-            margin: 0;
-            letter-spacing: 2px;
-        }
-
-        /* إضافة الشعار الجديد تحت العنوان */
-        .slogan {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.3rem;
-            color: var(--soft-gold);
-            margin-top: 10px;
-            display: block;
-            letter-spacing: 1px;
-        }
+        header { background: var(--primary); color: #ffffff; padding: 5rem 1rem; text-align: center; border-bottom: 5px solid var(--accent); }
+        header h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin: 0; letter-spacing: 2px; }
+        .slogan { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--soft-gold); margin-top: 10px; display: block; }
 
         .container { max-width: 1200px; margin: -40px auto 4rem; padding: 0 25px; }
 
-        .books-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); 
-            gap: 35px; 
-            margin-bottom: 70px; 
-        }
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 35px; margin-bottom: 70px; }
+        .book-card { background: white; padding: 25px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--soft-gold); display: flex; flex-direction: column; transition: 0.3s; }
+        .book-card:hover { transform: translateY(-10px); }
+        .book-card img { width: 100%; height: 280px; object-fit: contain; margin-bottom: 20px; }
+        .price-tag { font-size: 1.25rem; color: var(--accent); font-weight: 600; margin-bottom: 20px; }
+        .order-btn { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 50px; cursor: pointer; font-weight: bold; }
 
-        .book-card { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 20px; 
-            text-align: center; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            border: 1px solid var(--soft-gold); 
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .book-card:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 20px 40px rgba(26, 42, 58, 0.1);
-        }
-
-        .book-card img { 
-            width: 100%; 
-            height: 280px; 
-            object-fit: contain; 
-            margin-bottom: 20px;
-        }
-
-        .price-tag { 
-            font-size: 1.25rem;
-            color: var(--accent); 
-            font-weight: 600; 
-            margin-bottom: 20px; 
-        }
-
-        .order-btn { 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            padding: 14px; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .order-btn:hover { background: var(--accent); }
-
-        .checkout-container { 
-            display: grid; 
-            grid-template-columns: 1.6fr 1fr; 
-            gap: 40px; 
-            background: white; 
-            padding: 45px; 
-            border-radius: 30px; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-            border: 1px solid var(--soft-gold);
-        }
-
-        .section-title { 
-            font-family: 'Playfair Display', serif; 
-            color: var(--primary); 
-            font-size: 1.8rem; 
-            margin-bottom: 25px; 
-            border-left: 5px solid var(--accent);
-            padding-left: 15px;
-        }
-
-        input, select { 
-            width: 100%; padding: 16px; margin-bottom: 20px; 
-            border: 2px solid #ececec; border-radius: 12px; 
-            background: #fafafa; font-family: inherit;
-        }
+        .checkout-container { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; background: white; padding: 45px; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+        .section-title { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.8rem; margin-bottom: 25px; border-left: 5px solid var(--accent); padding-left: 15px; }
+        
+        input, select { width: 100%; padding: 16px; margin-bottom: 20px; border: 2px solid #ececec; border-radius: 12px; font-family: inherit; box-sizing: border-box; }
 
         .method-box { display: flex; gap: 15px; margin-bottom: 25px; }
-        .method { 
-            border: 2px solid #f0f0f0; padding: 15px; border-radius: 12px; 
-            cursor: pointer; flex: 1; text-align: center; transition: 0.3s;
-            background: none; font-family: inherit; font-size: 1rem;
-        }
+        .method { border: 2px solid #f0f0f0; padding: 15px; border-radius: 12px; cursor: pointer; flex: 1; text-align: center; background: none; font-family: inherit; }
         .method.active { border-color: var(--accent); background: #fffbf5; font-weight: bold; color: var(--accent); }
 
         .summary-box { background: #f9f7f4; padding: 35px; border-radius: 20px; }
+        .complete-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 22px; border-radius: 15px; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
 
-        .complete-btn { 
-            width: 100%; background: var(--primary); color: white; border: none; padding: 22px; 
-            border-radius: 15px; font-size: 1.2rem; cursor: pointer; font-weight: bold;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        @media (max-width: 900px) { .checkout-container { grid-template-columns: 1fr; } }
+        /* نافذة الدفع بالبطاقة (Payment Modal) */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
+        .modal-content { background: #fff; padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; }
+        .card-icons { margin-bottom: 20px; display: flex; gap: 10px; font-size: 0.8rem; font-weight: bold; }
+        .payment-input-row { display: flex; gap: 15px; }
+        .success-msg { display: none; text-align: center; padding: 50px; }
+        .success-msg h2 { color: #2ecc71; font-family: 'Playfair Display', serif; }
     </style>
 </head>
 <body>
@@ -166,59 +74,63 @@
         <div class="book-card"><img src="pr.jpg" alt="Public Relations"><h3>Public Relations</h3><span class="price-tag">2.000 KWD</span><button class="order-btn" onclick="addToCart('Public Relations', 2.000)">ADD TO CART</button></div>
     </section>
 
-    <div id="checkout-section" class="checkout-container">
-        <div>
-            <h3 class="section-title">Shipping Information</h3>
-            <input type="text" placeholder="Full Name" required id="cust-name">
-            <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-            
-            <select id="cust-area" required>
-                <option value="">Select Area in Kuwait</option>
-                <optgroup label="1. Asimah Governorate">
-                    <option>Kuwait City</option><option>Dasman</option><option>Sharq</option><option>Bneid Al-Gar</option><option>Kaifan</option><option>Al-Shamiya</option><option>Al-Rawda</option><option>Al-Adailiya</option><option>Al-Khaldiya</option><option>Yarmouk</option><option>Cordoba</option><option>Surra</option>
-                </optgroup>
-                <optgroup label="2. Hawalli Governorate">
-                    <option>Hawalli</option><option>Salmiya</option><option>Rumaithiya</option><option>Jabriya</option><option>Salwa</option><option>Bayan</option><option>Mishref</option><option>Al-Shaab</option><option>Mubarak Al-Abdullah</option>
-                </optgroup>
-                <optgroup label="3. Farwaniya Governorate">
-                    <option>Farwaniya</option><option>Khaitan</option><option>Andalous</option><option>Jleeb Al-Shuyoukh</option><option>Ardiya</option><option>Sabah Al-Nasser</option><option>Rabiya</option><option>Omariya</option><option>Al-Rehab</option><option>Al-Rai</option>
-                </optgroup>
-                <optgroup label="4. Mubarak Al-Kabeer Governorate">
-                    <option>Mubarak Al-Kabeer</option><option>Sabah Al-Salem</option><option>Al-Adan</option><option>Al-Qurain</option><option>Al-Qusour</option><option>Abu Fatira</option><option>Al-Fintas</option><option>Al-Masayel</option>
-                </optgroup>
-                <optgroup label="5. Ahmadi Governorate">
-                    <option>Ahmadi</option><option>Fahaheel</option><option>Mangaf</option><option>Abu Halifa</option><option>Sabah Al-Ahmad City</option><option>Khiran</option><option>Wafra</option><option>Mahboula</option><option>Al-Eqaila</option>
-                </optgroup>
-                <optgroup label="6. Jahra Governorate">
-                    <option>Jahra</option><option>Sulaibiya</option><option>Saad Al-Abdullah City</option><option>Taima</option><option>Al-Waha</option><option>Al-Naseem</option><option>Amghara</option>
-                </optgroup>
-            </select>
-            <input type="text" placeholder="Block, Street, House No." required id="cust-address">
+    <div id="main-store-ui">
+        <div id="checkout-section" class="checkout-container">
+            <div>
+                <h3 class="section-title">Shipping Information</h3>
+                <input type="text" id="cust-name" placeholder="Full Name" required>
+                <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8">
+                <select id="cust-area">
+                    <option value="">Select Area in Kuwait</option>
+                    <option>Kuwait City</option><option>Salmiya</option><option>Hawally</option><option>Jabriya</option> </select>
+                <input type="text" id="cust-address" placeholder="Block, Street, House No.">
 
-            <h3 class="section-title">Payment Method</h3>
-            <div class="method-box">
-                <button type="button" class="method active" id="knet-btn" onclick="setPayment('knet')">K-Net Link</button>
-                <button type="button" class="method" id="cash-btn" onclick="setPayment('cash')">Cash on Delivery</button>
-            </div>
-            <button class="complete-btn" onclick="processOrder()">Complete Order</button>
-        </div>
-
-        <aside class="summary-box">
-            <h3 class="section-title">Your Cart</h3>
-            <div id="cart-items-list"><p style="color: #666; text-align: center;">Your oasis is empty.</p></div>
-            <div style="margin-top: 20px; border-top: 2px solid var(--soft-gold); padding-top: 15px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span>Delivery:</span><span>2.000 KWD</span></div>
-                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.6rem;">
-                    <span>Total:</span><span id="grand-total">2.000 KWD</span>
+                <h3 class="section-title">Payment Method</h3>
+                <div class="method-box">
+                    <button type="button" class="method active" id="knet-btn" onclick="setPayment('knet')">K-Net Link</button>
+                    <button type="button" class="method" id="cash-btn" onclick="setPayment('cash')">Cash on Delivery</button>
                 </div>
+                <button class="complete-btn" onclick="handleOrder()">Complete Order</button>
             </div>
-        </aside>
+
+            <aside class="summary-box">
+                <h3 class="section-title">Your Cart</h3>
+                <div id="cart-items-list"><p>Your oasis is empty.</p></div>
+                <div style="margin-top: 20px; border-top: 2px solid var(--soft-gold); padding-top: 15px;">
+                    <div style="display: flex; justify-content: space-between;"><span>Total:</span><span id="grand-total" style="font-weight:bold; font-size:1.5rem;">2.000 KWD</span></div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <h3 class="section-title" style="font-size: 1.2rem;">Credit or debit card</h3>
+            <div class="card-icons">VISA | Mastercard | AMEX</div>
+            <input type="text" placeholder="First Name" id="p-first">
+            <input type="text" placeholder="Last Name" id="p-last">
+            <input type="text" placeholder="Card Number" maxlength="16">
+            <div class="payment-input-row">
+                <input type="text" placeholder="MM / YY" maxlength="5">
+                <input type="text" placeholder="CVV" maxlength="3">
+            </div>
+            <input type="text" placeholder="Kuwait" disabled>
+            <button class="complete-btn" onclick="showSuccess()">Pay Now</button>
+            <button style="background:none; border:none; color:grey; cursor:pointer; margin-top:10px;" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <div id="successPage" class="success-msg">
+        <div style="font-size: 5rem;">✅</div>
+        <h2>Thank You, Shaima!</h2>
+        <p>Your order has been placed successfully.</p>
+        <p>A confirmation message will be sent to your WhatsApp soon.</p>
+        <button class="order-btn" onclick="location.reload()" style="padding: 15px 40px;">Back to Store</button>
     </div>
 </main>
 
 <script>
     let cart = [];
-    let delivery = 2.000;
     let selectedMethod = 'knet';
 
     function addToCart(name, price) {
@@ -231,12 +143,12 @@
         const list = document.getElementById('cart-items-list');
         const totalDisplay = document.getElementById('grand-total');
         list.innerHTML = '';
-        let subtotal = 0;
+        let total = 2.000;
         cart.forEach(item => {
-            subtotal += item.price;
+            total += item.price;
             list.innerHTML += `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>${item.name}</span><span>${item.price.toFixed(3)} KWD</span></div>`;
         });
-        totalDisplay.innerText = (subtotal + delivery).toFixed(3) + " KWD";
+        totalDisplay.innerText = total.toFixed(3) + " KWD";
     }
 
     function setPayment(method) {
@@ -245,22 +157,26 @@
         document.getElementById('cash-btn').classList.toggle('active', method === 'cash');
     }
 
-    function processOrder() {
-        const phone = document.getElementById('phone').value;
+    function handleOrder() {
         const name = document.getElementById('cust-name').value;
+        if(!name) { alert("Please enter your name"); return; }
         
-        if(!name || phone.length < 8) {
-            alert("Please fill in your details correctly.");
-            return;
-        }
-
         if(selectedMethod === 'knet') {
-            // هنا نضع الرابط الذي سيفتح عند اختيار كي-نت
-            alert("Redirecting to K-Net Payment Gateway...");
-            window.open("https://www.knet.com.kw/", "_blank"); 
+            document.getElementById('p-first').value = name.split(' ')[0];
+            document.getElementById('paymentModal').style.display = 'flex';
         } else {
-            alert("Thank you! Order confirmed. We will contact you soon for Cash on Delivery.");
+            showSuccess();
         }
+    }
+
+    function closeModal() { document.getElementById('paymentModal').style.display = 'none'; }
+
+    function showSuccess() {
+        document.getElementById('paymentModal').style.display = 'none';
+        document.getElementById('main-store-ui').style.display = 'none';
+        document.querySelector('.books-grid').style.display = 'none';
+        document.getElementById('successPage').style.display = 'block';
+        window.scrollTo(0,0);
     }
 </script>
 </body>
