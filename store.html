@@ -3,29 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Second Chapter | Checkout</title>
+    <title>The Second Chapter | Complete Your Order</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1a2a3a; --accent: #c6934b; --bg: #f9f7f2; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; color: #333; }
-        header { background: var(--primary); color: white; text-align: center; padding: 1.5rem; }
-        .container { max-width: 900px; margin: 2rem auto; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        :root { --primary: #1a2a3a; --bg: #fdfbf7; --accent: #c6934b; }
         
-        /* تصميم قسم تفاصيل الشحن والدفع */
-        .checkout-form { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h3 { border-bottom: 2px solid var(--bg); padding-bottom: 10px; color: var(--primary); }
-        input, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; color: #333; }
+        
+        header { background: var(--primary); color: white; text-align: center; padding: 2.5rem 1rem; position: relative; }
+        .back-btn { position: absolute; left: 20px; top: 20px; color: white; text-decoration: none; border: 1px solid white; padding: 5px 12px; border-radius: 5px; font-size: 0.8rem; }
+
+        .container { max-width: 900px; margin: 3rem auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        
+        /* تصميم قسم تفاصيل الشحن */
+        .checkout-section { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .section-title { color: var(--primary); font-size: 1.1rem; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; margin-top: 0; }
+        
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-family: inherit; }
         
         .payment-methods { display: flex; gap: 10px; margin: 15px 0; }
-        .method { border: 1px solid #ddd; padding: 10px; border-radius: 8px; cursor: pointer; flex: 1; text-align: center; font-size: 0.9rem; }
+        .method { border: 2px solid #eee; padding: 12px; border-radius: 8px; cursor: pointer; flex: 1; text-align: center; transition: 0.3s; font-size: 0.9rem; }
         .method.active { border-color: var(--accent); background: #fffdf9; color: var(--accent); font-weight: bold; }
-
-        .complete-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        
+        .complete-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 16px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; margin-top: 20px; font-weight: bold; font-family: inherit; }
         .complete-btn:hover { background: #2c3e50; }
 
-        /* قسم ملخص الطلب */
-        .order-summary { background: #fff; padding: 25px; border-radius: 12px; height: fit-content; }
-        .book-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .book-item img { width: 50px; border-radius: 4px; }
+        /* تصميم قسم ملخص الطلب */
+        .order-summary { background: #fff; padding: 30px; border-radius: 12px; border: 1px solid #eee; height: fit-content; }
+        .sum-item { display: flex; justify-content: space-between; margin: 10px 0; color: #666; font-size: 0.9rem; }
         
         @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
     </style>
@@ -33,48 +38,62 @@
 <body>
 
 <header>
+    <a href="index.html" class="back-btn">← Back</a>
     <h1>Complete Your Order</h1>
 </header>
 
 <div class="container">
-    <div class="checkout-form">
-        <h3>1. Shipping Details</h3>
+    <div class="checkout-section">
+        <h3 class="section-title">1. Shipping Details</h3>
         <input type="text" placeholder="Full Name" required>
-        <input type="text" placeholder="Phone Number (WhatsApp)" required>
-        <select>
-            <option>Select Area (Kuwait)</option>
-            <option>Capital</option>
+        <input type="tel" placeholder="Phone Number (WhatsApp)" required>
+        <select required>
+            <option value="">Select Area in Kuwait</option>
+            <option>Capital / City</option>
             <option>Hawally</option>
+            <option>Salmiya</option>
             <option>Farwaniya</option>
-            <option>Mubarak Al-Kabeer</option>
-            <option>Ahmadi</option>
             <option>Jahra</option>
+            <option>Ahmadi</option>
         </select>
-        <input type="text" placeholder="Block, Street, House No." required>
+        <input type="text" placeholder="Address (Block, Street, House)" required>
 
-        <h3>2. Payment Options</h3>
+        <h3 class="section-title" style="margin-top:25px;">2. Payment Method</h3>
         <p style="font-size: 0.8rem; color: #666;">Choose how you want to pay:</p>
         <div class="payment-methods">
-            <div class="method active">K-Net Link</div>
-            <div class="method">Cash on Delivery</div>
+            <div class="method active" onclick="selectMethod(this)">K-Net Link</div>
+            <div class="method" onclick="selectMethod(this)">Cash on Delivery</div>
         </div>
 
-        <button class="complete-btn" onclick="alert('Order Received! We will contact you shortly.')">Place Order</button>
+        <button class="complete-btn" onclick="processOrder()">Place Order</button>
     </div>
 
     <div class="order-summary">
-        <h3>Order Summary</h3>
-        <div id="selected-books">
-            <p style="color: #888;">Items from your collection will appear here.</p>
+        <h3 class="section-title">Order Summary</h3>
+        <div id="summary-items">
+            <p style="color: #999; font-style: italic; font-size: 0.85rem; text-align: center; margin: 20px 0;">Items from your collection will appear here.</p>
         </div>
-        <hr>
-        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem;">
+        <hr style="border: none; border-top: 1px solid #eee;">
+        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; color: var(--primary); margin-top: 15px;">
             <span>Total:</span>
             <span>Calculating...</span>
         </div>
-        <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">* Shipping: 2.000 KWD (Flat Rate)</p>
+        <p style="font-size: 0.75rem; color: #777; margin-top: 10px;">* Shipping: 2.000 KWD (Flat Rate)</p>
     </div>
 </div>
+
+<script>
+    // لتفعيل اختيار طريقة الدفع عند الضغط عليها
+    function selectMethod(el) {
+        document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    // لرسالة التأكيد عند إتمام الطلب
+    function processOrder() {
+        alert('Order Received! A confirmation message and K-Net payment link (if chosen) will be sent to your phone number via WhatsApp.');
+    }
+</script>
 
 </body>
 </html>
