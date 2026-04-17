@@ -671,6 +671,20 @@ footer { background: #121d28; color: white; text-align: center; padding: 60px 20
                 loading="lazy">
                 Loading…
             </iframe>
+            <div style="margin-top: 25px; text-align: left; border-top: 1px solid #eee; padding-top: 20px;">
+    <label for="special-request" style="font-weight: 600; display: block; margin-bottom: 8px; color: #1a2a3a; font-family: 'Poppins', sans-serif;">
+        Looking for another book? 
+        <span style="font-weight: 400; font-size: 0.85rem; color: #666; display: block;">
+            (Enter title or author. We will search for it and update you with the price)
+        </span>
+    </label>
+    <textarea id="special-request" style="width: 100%; padding: 12px; border: 2px solid #f4ede3; border-radius: 12px; font-family: inherit; resize: vertical;" placeholder="e.g. The Alchemist - Paulo Coelho"></textarea>
+    
+    <p style="font-size: 0.8rem; color: #777; margin-top: 15px; line-height: 1.5; font-style: italic;">
+        * Delivery: 24-48 hours.<br>
+        * Pre-owned books are non-refundable/non-exchangeable.
+    </p>
+</div>
         </div>
 
         <div id="location" style="text-align: center;">
@@ -709,53 +723,59 @@ footer { background: #121d28; color: white; text-align: center; padding: 60px 20
     </script>
     <script>
         function showSuccess() {
-            const nameInput = document.getElementById('cust-name').value;
-            const area = document.getElementById('cust-area').value;
-            const special = document.getElementById('special-request').value;
-            
-            let bookList = cart.map(item => item.name).join(", ");
-            
-            let message = `Hello Second Chapter, I placed an order!\n\n`;
-            message += `👤 Name: ${nameInput}\n`;
-            message += `📍 Area: ${area}\n`;
-            message += `📚 Books: ${bookList || "Special Request Only"}\n`;
-            
-            if(special) {
-                message += `✨ Special Request: ${special}\n`;
-            }
+    const nameInput = document.getElementById('cust-name').value;
+    const area = document.getElementById('cust-area').value;
+    const special = document.getElementById('special-request').value;
+    
+    // 1. Get books from cart
+    let bookList = cart.map(item => item.name).join(", ");
+    
+    // 2. Format the WhatsApp message
+    let message = `Hello Second Chapter, I've placed an order!\n\n`;
+    message += `👤 *Name:* ${nameInput}\n`;
+    message += `📍 *Area:* ${area}\n`;
+    message += `📚 *Books:* ${bookList || "Special Request Only"}\n`;
+    
+    if(special) {
+        message += `✨ *Special Request:* ${special}\n`;
+    }
 
-            const whatsappUrl = `https://wa.me/96599123456?text=${encodeURIComponent(message)}`;
+    // 3. WhatsApp Link (Replace XXXXXXXX with your actual 8-digit number)
+    const whatsappUrl = `https://wa.me/965XXXXXXXX?text=${encodeURIComponent(message)}`;
 
-            document.getElementById('success-user-name').innerText = "Thank You, " + nameInput + "!";
-            document.getElementById('paymentModal').style.display = 'none';
-            document.getElementById('main-store-ui').style.display = 'none';
-            document.getElementById('books-section').style.display = 'none';
+    // 4. Update UI
+    document.getElementById('main-store-ui').style.display = 'none';
+    document.getElementById('books-section').style.display = 'none';
+    
+    const successDiv = document.getElementById('successPage');
+    successDiv.style.display = 'block';
+    
+    // 5. Success Content with WhatsApp Button
+    successDiv.innerHTML = `
+        <div style="text-align: center; padding: 50px 20px;">
+            <div style="font-size: 5rem; margin-bottom: 20px;">✅</div>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #1a2a3a;">Order Placed!</h2>
+            <p style="color: #666; margin-bottom: 30px; font-size: 1.1rem;">
+                Thank you **${nameInput}**! Please click the button below to send your order details via WhatsApp for final confirmation.
+            </p>
             
-            const successDiv = document.getElementById('successPage');
-            successDiv.style.display = 'block';
+            <a href="${whatsappUrl}" target="_blank" 
+               style="background-color: #25D366; color: white; padding: 20px 40px; border-radius: 15px; 
+                      text-decoration: none; font-weight: bold; font-size: 1.2rem; display: inline-block; 
+                      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);">
+                Confirm Order via WhatsApp
+            </a>
             
-            successDiv.innerHTML = `
-                <div role="status" aria-live="polite">
-                    <div style="font-size: 5rem; margin-bottom: 20px;" aria-hidden="true">✅</div>
-                    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary);">Order Placed!</h2>
-                    <p style="color: #666; margin-bottom: 30px;">To finalize your order and arrange delivery, please click the button below to confirm via WhatsApp:</p>
-                    
-                    <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
-                        <a href="${whatsappUrl}" target="_blank" class="complete-btn" 
-                           style="text-decoration:none; background:#25D366; display:inline-block; width: auto; padding: 15px 30px;"
-                           aria-label="Confirm your order on WhatsApp">
-                            Confirm via WhatsApp
-                        </a>
-                        <button class="order-btn" onclick="location.reload()" 
-                                style="background:none; color:var(--accent); border:1px solid var(--accent); padding: 10px 20px;">
-                            Return to Store
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+            <button onclick="location.reload()" 
+                    style="display: block; margin: 30px auto 0; background: none; border: 1px solid #8b5a2b; 
+                           color: #8b5a2b; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                Return to Store
+            </button>
+        </div>
+    `;
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
     </script>
 </body>
 </html>
