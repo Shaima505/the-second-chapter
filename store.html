@@ -43,6 +43,7 @@
         .method.active { border-color: var(--accent); background: #fffbf5; font-weight: bold; color: var(--accent); }
 
         .summary-box { background: #f9f7f4; padding: 35px; border-radius: 20px; }
+        .delivery-text { color: #666; font-size: 0.9rem; display: flex; justify-content: space-between; margin-top: 15px; padding-top: 10px; border-top: 1px solid #e0e0e0; }
         .complete-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 22px; border-radius: 15px; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
 
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
@@ -109,9 +110,18 @@
 
             <aside class="summary-box">
                 <h3 class="section-title">Your Cart</h3>
-                <div id="cart-items-list"><p>Your oasis is empty.</p></div>
-                <div style="margin-top: 20px; border-top: 2px solid var(--soft-gold); padding-top: 15px;">
-                    <div style="display: flex; justify-content: space-between;"><span>Total:</span><span id="grand-total" style="font-weight:bold; font-size:1.5rem;">2.000 KWD</span></div>
+                <div id="cart-items-list"><p style="color: #666; text-align: center;">Your collection is empty.</p></div>
+                
+                <div class="delivery-text">
+                    <span>Delivery Fee:</span>
+                    <span>2.000 KWD</span>
+                </div>
+                
+                <div style="margin-top: 10px; border-top: 2px solid var(--soft-gold); padding-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Total:</span>
+                        <span id="grand-total" style="font-weight:bold; font-size:1.6rem; color: var(--primary);">2.000 KWD</span>
+                    </div>
                 </div>
             </aside>
         </div>
@@ -123,7 +133,7 @@
             <input type="text" id="p-card-name" placeholder="Name on Card">
             <input type="text" id="p-card-num" placeholder="Card Number (16 digits)" maxlength="16" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             <div style="display:flex; gap:10px;">
-                <input type="text" id="p-card-date" placeholder="MM / YY" maxlength="5">
+                <input type="text" id="p-card-date" placeholder="MM / YY" maxlength="7" oninput="formatExpiryDate(this)">
                 <input type="text" id="p-card-cvv" placeholder="CVV (3 digits)" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
             <button class="complete-btn" onclick="validateKnet()">Pay Now</button>
@@ -142,6 +152,7 @@
 <script>
     let cart = [];
     let selectedMethod = 'knet';
+    const deliveryFee = 2.000;
 
     function addToCart(name, price) {
         cart.push({name, price});
@@ -153,12 +164,22 @@
         const list = document.getElementById('cart-items-list');
         const totalDisplay = document.getElementById('grand-total');
         list.innerHTML = '';
-        let total = 2.000;
+        let subtotal = 0;
         cart.forEach(item => {
-            total += item.price;
+            subtotal += item.price;
             list.innerHTML += `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>${item.name}</span><span>${item.price.toFixed(3)} KWD</span></div>`;
         });
-        totalDisplay.innerText = total.toFixed(3) + " KWD";
+        totalDisplay.innerText = (subtotal + deliveryFee).toFixed(3) + " KWD";
+    }
+
+    // تنسيق التاريخ تلقائياً لإضافة الفاصلة
+    function formatExpiryDate(input) {
+        let val = input.value.replace(/\D/g, ''); // حذف أي شيء ليس رقماً
+        if (val.length > 2) {
+            input.value = val.slice(0, 2) + ' / ' + val.slice(2, 4);
+        } else {
+            input.value = val;
+        }
     }
 
     function setPayment(method) {
@@ -173,7 +194,7 @@
         const area = document.getElementById('cust-area').value;
         const addr = document.getElementById('cust-address').value;
 
-        if(cart.length === 0) { alert("Your cart is empty!"); return; }
+        if(cart.length === 0) { alert("Your collection is empty!"); return; }
         if(!nameInput || phone.length < 8 || !area || !addr) { alert("Please fill in all shipping details."); return; }
         
         if(selectedMethod === 'knet') {
@@ -188,19 +209,10 @@
         const cDate = document.getElementById('p-card-date').value;
         const cCvv = document.getElementById('p-card-cvv').value;
 
-        // التحقق من التاريخ ومن أن الـ CVV يساوي 3 أرقام بالضبط
-        if(!cDate || cDate.length < 5) {
-            alert("Please enter a valid expiry date (MM / YY).");
-            return;
-        }
-        if(cCvv.length !== 3) {
-            alert("CVV must be exactly 3 digits.");
-            return;
-        }
-        if(cNum.length < 16) {
-            alert("Card number must be 16 digits.");
-            return;
-        }
+        // التحقق من طول التاريخ (MM / YY) يكون 7 خانات بالمسافات والفاصلة
+        if(!cDate || cDate.length < 7) { alert("Invalid expiry date. Use MM / YY"); return; }
+        if(cCvv.length !== 3) { alert("CVV must be exactly 3 digits."); return; }
+        if(cNum.length < 16) { alert("Invalid card number (16 digits required)."); return; }
 
         showSuccess();
     }
