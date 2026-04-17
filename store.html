@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Second Chapter | Bookstore Oasis</title>
+    <title>The Second Chapter | Bookstore</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { 
@@ -43,7 +43,7 @@
         .method.active { border-color: var(--accent); background: #fffbf5; font-weight: bold; color: var(--accent); }
 
         .summary-box { background: #f9f7f4; padding: 35px; border-radius: 20px; }
-        .delivery-text { color: #666; font-size: 0.9rem; display: flex; justify-content: space-between; margin-top: 15px; padding-top: 10px; border-top: 1px solid #e0e0e0; }
+        .delivery-row { color: #666; font-size: 0.9rem; display: flex; justify-content: space-between; margin-top: 15px; padding-top: 10px; border-top: 1px solid #e0e0e0; visibility: hidden; }
         .complete-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 22px; border-radius: 15px; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
 
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
@@ -110,9 +110,9 @@
 
             <aside class="summary-box">
                 <h3 class="section-title">Your Cart</h3>
-                <div id="cart-items-list"><p style="color: #666; text-align: center;">Your collection is empty.</p></div>
+                <div id="cart-items-list"><p style="color: #666; text-align: center;">Your cart is empty.</p></div>
                 
-                <div class="delivery-text">
+                <div id="delivery-info" class="delivery-row">
                     <span>Delivery Fee:</span>
                     <span>2.000 KWD</span>
                 </div>
@@ -120,7 +120,7 @@
                 <div style="margin-top: 10px; border-top: 2px solid var(--soft-gold); padding-top: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span>Total:</span>
-                        <span id="grand-total" style="font-weight:bold; font-size:1.6rem; color: var(--primary);">2.000 KWD</span>
+                        <span id="grand-total" style="font-weight:bold; font-size:1.6rem; color: var(--primary);">0.000 KWD</span>
                     </div>
                 </div>
             </aside>
@@ -163,18 +163,28 @@
     function updateSummary() {
         const list = document.getElementById('cart-items-list');
         const totalDisplay = document.getElementById('grand-total');
+        const deliveryRow = document.getElementById('delivery-info');
         list.innerHTML = '';
+        
+        if (cart.length === 0) {
+            list.innerHTML = '<p style="color: #666; text-align: center;">Your cart is empty.</p>';
+            totalDisplay.innerText = "0.000 KWD";
+            deliveryRow.style.visibility = 'hidden';
+            return;
+        }
+
         let subtotal = 0;
         cart.forEach(item => {
             subtotal += item.price;
             list.innerHTML += `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>${item.name}</span><span>${item.price.toFixed(3)} KWD</span></div>`;
         });
+
+        deliveryRow.style.visibility = 'visible';
         totalDisplay.innerText = (subtotal + deliveryFee).toFixed(3) + " KWD";
     }
 
-    // تنسيق التاريخ تلقائياً لإضافة الفاصلة
     function formatExpiryDate(input) {
-        let val = input.value.replace(/\D/g, ''); // حذف أي شيء ليس رقماً
+        let val = input.value.replace(/\D/g, '');
         if (val.length > 2) {
             input.value = val.slice(0, 2) + ' / ' + val.slice(2, 4);
         } else {
@@ -194,7 +204,7 @@
         const area = document.getElementById('cust-area').value;
         const addr = document.getElementById('cust-address').value;
 
-        if(cart.length === 0) { alert("Your collection is empty!"); return; }
+        if(cart.length === 0) { alert("Your cart is empty! Please add a book first."); return; }
         if(!nameInput || phone.length < 8 || !area || !addr) { alert("Please fill in all shipping details."); return; }
         
         if(selectedMethod === 'knet') {
@@ -209,7 +219,6 @@
         const cDate = document.getElementById('p-card-date').value;
         const cCvv = document.getElementById('p-card-cvv').value;
 
-        // التحقق من طول التاريخ (MM / YY) يكون 7 خانات بالمسافات والفاصلة
         if(!cDate || cDate.length < 7) { alert("Invalid expiry date. Use MM / YY"); return; }
         if(cCvv.length !== 3) { alert("CVV must be exactly 3 digits."); return; }
         if(cNum.length < 16) { alert("Invalid card number (16 digits required)."); return; }
