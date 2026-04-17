@@ -31,24 +31,30 @@
         .book-card { background: white; padding: 25px; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--soft-gold); display: flex; flex-direction: column; transition: 0.3s; }
         .book-card img { width: 100%; height: 280px; object-fit: contain; margin-bottom: 20px; }
         .price-tag { font-size: 1.25rem; color: var(--accent); font-weight: 600; margin-bottom: 20px; }
-        .order-btn { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 50px; cursor: pointer; font-weight: bold; }
+        .order-btn { background: var(--primary); color: white; border: none; padding: 14px; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
 
         .checkout-container { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; background: white; padding: 45px; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
-        .section-title { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.8rem; margin-bottom: 25px; border-left: 5px solid var(--accent); padding-left: 15px; }
         
-        input, select { width: 100%; padding: 16px; margin-bottom: 20px; border: 2px solid #ececec; border-radius: 12px; font-family: inherit; box-sizing: border-box; }
+        .shipping-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; border-left: 5px solid var(--accent); padding-left: 15px; }
+        .section-title { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 1.8rem; margin: 0; }
+        
+        .back-home-btn { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; border: 1px solid var(--accent); padding: 5px 15px; border-radius: 20px; transition: 0.3s; }
+        .back-home-btn:hover { background: var(--accent); color: white; }
+
+        input, select, textarea { width: 100%; padding: 16px; margin-bottom: 20px; border: 2px solid #ececec; border-radius: 12px; font-family: inherit; box-sizing: border-box; }
+        textarea { resize: vertical; min-height: 80px; border: 2px dashed var(--soft-gold); }
 
         .method-box { display: flex; gap: 15px; margin-bottom: 25px; }
         .method { border: 2px solid #f0f0f0; padding: 15px; border-radius: 12px; cursor: pointer; flex: 1; text-align: center; background: none; font-family: inherit; }
         .method.active { border-color: var(--accent); background: #fffbf5; font-weight: bold; color: var(--accent); }
 
-        .summary-box { background: #f9f7f4; padding: 35px; border-radius: 20px; }
-        .delivery-row { color: #666; font-size: 0.9rem; display: flex; justify-content: space-between; margin-top: 15px; padding-top: 10px; border-top: 1px solid #e0e0e0; visibility: hidden; }
+        .summary-box { background: #f9f7f4; padding: 35px; border-radius: 20px; align-self: start; position: sticky; top: 20px; }
+        .delivery-row { color: #666; font-size: 0.9rem; display: flex; justify-content: space-between; margin-top: 15px; padding-top: 10px; border-top: 1px solid #e0e0e0; display: none; }
         .complete-btn { width: 100%; background: var(--primary); color: white; border: none; padding: 22px; border-radius: 15px; font-size: 1.2rem; cursor: pointer; font-weight: bold; }
 
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
-        .modal-content { background: #fff; padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; }
-        .success-msg { display: none; text-align: center; padding: 50px; }
+        .modal-content { background: #fff; padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; }
+        .success-msg { display: none; text-align: center; padding: 80px 20px; }
     </style>
 </head>
 <body>
@@ -73,7 +79,11 @@
     <div id="main-store-ui">
         <div id="checkout-section" class="checkout-container">
             <div>
-                <h3 class="section-title">Shipping Information</h3>
+                <div class="shipping-header">
+                    <h3 class="section-title">Shipping Details</h3>
+                    <a href="index.html" class="back-home-btn">← Back to Home</a>
+                </div>
+
                 <input type="text" id="cust-name" placeholder="Full Name" required>
                 <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8">
                 
@@ -100,7 +110,10 @@
                 </select>
                 <input type="text" id="cust-address" placeholder="Block, Street, House No.">
 
-                <h3 class="section-title">Payment Method</h3>
+                <h3 class="section-title" style="font-size: 1.2rem; margin-bottom: 10px;">Looking for another book?</h3>
+                <textarea id="special-request" placeholder="Enter book title or author (Optional) - We will check its availability for you!"></textarea>
+
+                <h3 class="section-title" style="margin-top: 20px; margin-bottom: 20px;">Payment Method</h3>
                 <div class="method-box">
                     <button type="button" class="method active" id="knet-btn" onclick="setPayment('knet')">K-Net Link</button>
                     <button type="button" class="method" id="cash-btn" onclick="setPayment('cash')">Cash on Delivery</button>
@@ -109,7 +122,7 @@
             </div>
 
             <aside class="summary-box">
-                <h3 class="section-title">Your Cart</h3>
+                <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 20px;">Your Cart</h3>
                 <div id="cart-items-list"><p style="color: #666; text-align: center;">Your cart is empty.</p></div>
                 
                 <div id="delivery-info" class="delivery-row">
@@ -129,23 +142,25 @@
 
     <div id="paymentModal" class="modal">
         <div class="modal-content">
-            <h3 class="section-title" style="font-size: 1.2rem;">Credit or debit card</h3>
-            <input type="text" id="p-card-name" placeholder="Name on Card">
-            <input type="text" id="p-card-num" placeholder="Card Number (16 digits)" maxlength="16" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-            <div style="display:flex; gap:10px;">
-                <input type="text" id="p-card-date" placeholder="MM / YY" maxlength="7" oninput="formatExpiryDate(this)">
-                <input type="text" id="p-card-cvv" placeholder="CVV (3 digits)" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <h3 class="section-title" style="font-size: 1.2rem; border:none; padding:0;">Credit or debit card</h3>
+            <div style="margin-top: 20px;">
+                <input type="text" id="p-card-name" placeholder="Name on Card">
+                <input type="text" id="p-card-num" placeholder="Card Number (16 digits)" maxlength="16" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                <div style="display:flex; gap:10px;">
+                    <input type="text" id="p-card-date" placeholder="MM / YY" maxlength="7" oninput="formatExpiryDate(this)">
+                    <input type="text" id="p-card-cvv" placeholder="CVV (3 digits)" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                </div>
+                <button class="complete-btn" onclick="validateKnet()">Pay Now</button>
+                <button style="background:none; border:none; color:grey; cursor:pointer; width:100%; margin-top:10px;" onclick="closeModal()">Cancel</button>
             </div>
-            <button class="complete-btn" onclick="validateKnet()">Pay Now</button>
-            <button style="background:none; border:none; color:grey; cursor:pointer; width:100%; margin-top:10px;" onclick="closeModal()">Cancel</button>
         </div>
     </div>
 
     <div id="successPage" class="success-msg">
-        <div style="font-size: 5rem;">✅</div>
-        <h2 id="success-user-name">Thank You!</h2>
-        <p>Your order has been placed successfully.</p>
-        <button class="order-btn" onclick="location.reload()" style="padding: 15px 40px;">Return to Store</button>
+        <div style="font-size: 5rem; margin-bottom: 20px;">✅</div>
+        <h2 id="success-user-name" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--primary);">Thank You!</h2>
+        <p style="color: #666; margin-bottom: 40px;">Your order has been placed successfully. We will contact you soon!</p>
+        <button class="order-btn" onclick="location.reload()" style="padding: 18px 50px; font-size: 1.1rem;">Back to Bookstore</button>
     </div>
 </main>
 
@@ -169,7 +184,7 @@
         if (cart.length === 0) {
             list.innerHTML = '<p style="color: #666; text-align: center;">Your cart is empty.</p>';
             totalDisplay.innerText = "0.000 KWD";
-            deliveryRow.style.visibility = 'hidden';
+            deliveryRow.style.display = 'none';
             return;
         }
 
@@ -179,7 +194,7 @@
             list.innerHTML += `<div style="display: flex; justify-content: space-between; margin-bottom: 8px;"><span>${item.name}</span><span>${item.price.toFixed(3)} KWD</span></div>`;
         });
 
-        deliveryRow.style.visibility = 'visible';
+        deliveryRow.style.display = 'flex';
         totalDisplay.innerText = (subtotal + deliveryFee).toFixed(3) + " KWD";
     }
 
@@ -204,8 +219,14 @@
         const area = document.getElementById('cust-area').value;
         const addr = document.getElementById('cust-address').value;
 
-        if(cart.length === 0) { alert("Your cart is empty! Please add a book first."); return; }
-        if(!nameInput || phone.length < 8 || !area || !addr) { alert("Please fill in all shipping details."); return; }
+        if(cart.length === 0 && document.getElementById('special-request').value === "") { 
+            alert("Please add a book or write the title of the book you want."); 
+            return; 
+        }
+        if(!nameInput || phone.length < 8 || !area || !addr) { 
+            alert("Please fill in all shipping details."); 
+            return; 
+        }
         
         if(selectedMethod === 'knet') {
             document.getElementById('paymentModal').style.display = 'flex';
@@ -219,9 +240,9 @@
         const cDate = document.getElementById('p-card-date').value;
         const cCvv = document.getElementById('p-card-cvv').value;
 
-        if(!cDate || cDate.length < 7) { alert("Invalid expiry date. Use MM / YY"); return; }
-        if(cCvv.length !== 3) { alert("CVV must be exactly 3 digits."); return; }
-        if(cNum.length < 16) { alert("Invalid card number (16 digits required)."); return; }
+        if(!cDate || cDate.length < 7) { alert("Expiry date is required."); return; }
+        if(cCvv.length !== 3) { alert("CVV must be 3 digits."); return; }
+        if(cNum.length < 16) { alert("Card number must be 16 digits."); return; }
 
         showSuccess();
     }
@@ -235,7 +256,7 @@
         document.getElementById('main-store-ui').style.display = 'none';
         document.getElementById('books-section').style.display = 'none';
         document.getElementById('successPage').style.display = 'block';
-        window.scrollTo(0,0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
 </body>
