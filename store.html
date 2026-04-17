@@ -74,8 +74,9 @@
             <div>
                 <h3 class="section-title">Shipping Information</h3>
                 <input type="text" id="cust-name" placeholder="Full Name" required>
-                <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8" required>
-                <select id="cust-area" required>
+                <input type="tel" id="phone" placeholder="WhatsApp Number (8 digits)" maxlength="8">
+                
+                <select id="cust-area">
                     <option value="">Select Area in Kuwait</option>
                     <optgroup label="1. Asimah Governorate">
                         <option>Kuwait City</option><option>Dasman</option><option>Sharq</option><option>Bneid Al-Gar</option><option>Kaifan</option><option>Al-Shamiya</option><option>Al-Rawda</option><option>Al-Adailiya</option><option>Al-Khaldiya</option><option>Yarmouk</option><option>Cordoba</option><option>Surra</option>
@@ -96,7 +97,7 @@
                         <option>Jahra</option><option>Sulaibiya</option><option>Saad Al-Abdullah City</option><option>Taima</option><option>Al-Waha</option><option>Al-Naseem</option><option>Amghara</option>
                     </optgroup>
                 </select>
-                <input type="text" id="cust-address" placeholder="Block, Street, House No." required>
+                <input type="text" id="cust-address" placeholder="Block, Street, House No.">
 
                 <h3 class="section-title">Payment Method</h3>
                 <div class="method-box">
@@ -119,13 +120,13 @@
     <div id="paymentModal" class="modal">
         <div class="modal-content">
             <h3 class="section-title" style="font-size: 1.2rem;">Credit or debit card</h3>
-            <input type="text" id="p-card-name" placeholder="Name on Card" required>
-            <input type="text" id="p-card-num" placeholder="Card Number (16 digits)" maxlength="16" required>
+            <input type="text" id="p-card-name" placeholder="Name on Card">
+            <input type="text" id="p-card-num" placeholder="Card Number (16 digits)" maxlength="16" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             <div style="display:flex; gap:10px;">
-                <input type="text" id="p-card-date" placeholder="MM / YY" maxlength="5" required>
-                <input type="text" id="p-card-cvv" placeholder="CVV" maxlength="3" required>
+                <input type="text" id="p-card-date" placeholder="MM / YY" maxlength="5">
+                <input type="text" id="p-card-cvv" placeholder="CVV (3 digits)" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
-            <button class="complete-btn" onclick="validateAndPay()">Pay Now</button>
+            <button class="complete-btn" onclick="validateKnet()">Pay Now</button>
             <button style="background:none; border:none; color:grey; cursor:pointer; width:100%; margin-top:10px;" onclick="closeModal()">Cancel</button>
         </div>
     </div>
@@ -167,22 +168,13 @@
     }
 
     function handleOrder() {
-        const name = document.getElementById('cust-name').value;
+        const nameInput = document.getElementById('cust-name').value;
         const phone = document.getElementById('phone').value;
         const area = document.getElementById('cust-area').value;
-        const address = document.getElementById('cust-address').value;
+        const addr = document.getElementById('cust-address').value;
 
-        // التحقق من السلة
-        if(cart.length === 0) {
-            alert("Your cart is empty! Please add at least one book.");
-            return;
-        }
-
-        // التحقق من معلومات الشحن
-        if(!name || phone.length < 8 || !area || !address) {
-            alert("Please fill in all shipping information correctly (Name, 8-digit Phone, Area, and Address).");
-            return;
-        }
+        if(cart.length === 0) { alert("Your cart is empty!"); return; }
+        if(!nameInput || phone.length < 8 || !area || !addr) { alert("Please fill in all shipping details."); return; }
         
         if(selectedMethod === 'knet') {
             document.getElementById('paymentModal').style.display = 'flex';
@@ -191,17 +183,25 @@
         }
     }
 
-    function validateAndPay() {
-        const cName = document.getElementById('p-card-name').value;
+    function validateKnet() {
         const cNum = document.getElementById('p-card-num').value;
         const cDate = document.getElementById('p-card-date').value;
         const cCvv = document.getElementById('p-card-cvv').value;
 
-        // التحقق من معلومات الكي نت
-        if(!cName || cNum.length < 16 || !cDate || cCvv.length < 3) {
-            alert("Please enter complete card details (16-digit Card Number and CVV).");
+        // التحقق من التاريخ ومن أن الـ CVV يساوي 3 أرقام بالضبط
+        if(!cDate || cDate.length < 5) {
+            alert("Please enter a valid expiry date (MM / YY).");
             return;
         }
+        if(cCvv.length !== 3) {
+            alert("CVV must be exactly 3 digits.");
+            return;
+        }
+        if(cNum.length < 16) {
+            alert("Card number must be 16 digits.");
+            return;
+        }
+
         showSuccess();
     }
 
